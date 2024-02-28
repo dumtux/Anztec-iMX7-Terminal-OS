@@ -7,22 +7,28 @@
 /* Ubuntu and Debian */
 
 $ sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev python3-subunit mesa-common-dev zstd liblz4-tool file locales libacl1
+
 $ sudo locale-gen en_US.UTF-8
 
 ### Repo and Git
 
 /* Install the repo bootstrap binary: */
 
-$ mkdir ~/bin
-$ export PATH=~/bin:$PATH
-$ curl https://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-$ chmod a+x ~/bin/repo
+$ mkdir bin
+
+$ export PATH=bin:$PATH
+
+$ curl https://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
+
+$ chmod a+x bin/repo
 
 Repo uses Git. Make sure you have it installed and your user name and e-mail address configured.
 Below is an example for Debian-based systems:
 
 $ sudo apt install git
+
 $ git config --global user.name "user-name"
+
 $ git config --global user.email <example@example.com>
 
 ### Installation
@@ -32,9 +38,11 @@ $ git config --global user.email <example@example.com>
 /* Create a directory for your OE-Core setup to live in and clone the meta-information: */
 
 $ mkdir ${HOME}/oe-core
+
 $ cd ${HOME}/oe-core
-$ repo init -u git://git.toradex.com/toradex-manifest.git -b kirkstone-6.x.y -m
-tdxref/default.xml
+
+$ repo init -u git://git.toradex.com/toradex-manifest.git -b kirkstone-6.x.y -m tdxref/default.xml
+
 $ repo sync
 
 /* source the file export to setup the environment */
@@ -48,13 +56,10 @@ Adapt build/conf/local.conf to your needs
 The MACHINE variable specifies the target device for the image. Set this variable to the module type
 you are planning to build for.
 
-+--------------------+-----------------------------------------+
 | MACHINE NAME       | Corresponding Toradex Module            |
-+====================+=========================================+
+|--------------------|-----------------------------------------|
 | colibri-imx7       | Colibri iMX7S 256MB and iMX7D 512MB     |
-+--------------------+-----------------------------------------+
 | colibri-imx7-emmc  | Colibri iMX7D 1GB                       |
-+--------------------+-----------------------------------------+
 
 open the local.conf and add the MACHINE
 
@@ -65,6 +70,7 @@ MACHINE ?= "colibri-imx7-emmc"
 Clone the repsitory into the layers
 
 $ cd oe-core/layers
+
 $ git clone https://github.com/Miktronic/Anztec-iMX7-Terminal-Project.git
 
 // If the repository is private use the below method
@@ -74,7 +80,9 @@ $ git clone https://your_username:your_personal_access_token@github.com/Miktroni
 Add the layer into bblayers.conf using the command
 
 $ cd ../
+
 $ . exports
+
 $ bitbake-layers add-layers ../path/to/custom/layer
 
 After adding the layer we can confirm the addition of layer in build environment by
