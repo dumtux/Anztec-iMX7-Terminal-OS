@@ -1,0 +1,29 @@
+commit 8324e8a3b98e8c62e8daf024e6253c2b2affbb92
+Author: vinothneevee <vinoth@neeveetech.com>
+Date:   Fri Mar 8 14:22:14 2024 +0530
+
+    eth2 additional changes
+
+diff --git a/arch/arm/boot/dts/imx7d.dtsi b/arch/arm/boot/dts/imx7d.dtsi
+index 16aaec74e80e..22ea79b32e80 100644
+--- a/arch/arm/boot/dts/imx7d.dtsi
++++ b/arch/arm/boot/dts/imx7d.dtsi
+@@ -200,12 +200,16 @@ fec2: ethernet@30bf0000 {
+ 			<&clks IMX7D_ENET_PHY_REF_ROOT_CLK>;
+ 		clock-names = "ipg", "ahb", "ptp",
+ 			"enet_clk_ref", "enet_out";
+-		fsl,num-tx-queues = <3>;
++        assigned-clock-parents = <&clks IMX7D_PLL_ENET_MAIN_100M_CLK>;
++    	assigned-clock-rates = <0>, <100000000>;
++    	assigned-clocks = <&clks IMX7D_ENET2_TIME_ROOT_SRC>,
++                                         <&clks IMX7D_ENET2_TIME_ROOT_CLK>;
++                fsl,num-tx-queues = <3>;
+ 		fsl,num-rx-queues = <3>;
+ 		fsl,stop-mode = <&gpr 0x10 4>;
+ 		phy-handle = <&ethphy1>;
+ 		phy-mode = "rmii";
+-		phy-sypply = <&reg_module_3v3_eth>;
++		phy-supply = <&reg_LDO1>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_enet2>;
+ 		fsl,mii-exclusive;

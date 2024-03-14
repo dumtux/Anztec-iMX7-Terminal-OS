@@ -1,0 +1,69 @@
+commit 101c3ce80e27eeb4942744e839dda7771c3d7069
+Author: vinothneevee <vinoth@neeveetech.com>
+Date:   Sat Mar 9 14:14:32 2024 +0530
+
+    eth2 additional changes_2
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 6eb906855e3e..fadd5026d10c 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -49,7 +49,7 @@ mcp2515: can@0 {
+ 
+ /* Colibri Fast Ethernet */
+ &fec1 {
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ /* Colibri Second Ethernet */
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index f5f9c2a18d2d..e5fcff113a02 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -105,6 +105,17 @@ reg_module_3v3_eth: regulator-module-3v3-eth {
+ 		vin-supply = <&reg_LDO1>;
+ 	};
+ 
++	reg_module_3v3_eth2: regulator-module-3v3-eth2 {
++		compatible = "regulator-fixed";
++		off-on-delay-us = <200000>;
++		regulator-name = "+V3.3_ETH";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-boot-on;
++		startup-delay-us = <200000>;
++		vin-supply = <&reg_LDO1>;
++	};
++
+ 	reg_usbh_vbus: regulator-usbh-vbus {
+ 		compatible = "regulator-fixed";
+ 		gpio = <&gpio4 7 GPIO_ACTIVE_LOW>; /* SODIMM 129 / USBH_PEN */
+diff --git a/arch/arm/boot/dts/imx7d.dtsi b/arch/arm/boot/dts/imx7d.dtsi
+index 22ea79b32e80..c4e7f997f121 100644
+--- a/arch/arm/boot/dts/imx7d.dtsi
++++ b/arch/arm/boot/dts/imx7d.dtsi
+@@ -207,12 +207,13 @@ fec2: ethernet@30bf0000 {
+                 fsl,num-tx-queues = <3>;
+ 		fsl,num-rx-queues = <3>;
+ 		fsl,stop-mode = <&gpr 0x10 4>;
++                fsl,magic-packet;
+ 		phy-handle = <&ethphy1>;
+ 		phy-mode = "rmii";
+-		phy-supply = <&reg_LDO1>;
++		phy-supply = <&reg_module_3v3_eth2>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_enet2>;
+-		fsl,mii-exclusive;
++	
+ 		mdio {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -220,6 +221,7 @@ mdio {
+ 			ethphy1: ethernet-phy@0 {
+ 				compatible = "ethernet-phy-ieee802.3-c22";
+ 				max-speed = <100>;
++                                micrel,led-mode = <0>;
+ 				reg = <0>;
+ 				};
+ 		};

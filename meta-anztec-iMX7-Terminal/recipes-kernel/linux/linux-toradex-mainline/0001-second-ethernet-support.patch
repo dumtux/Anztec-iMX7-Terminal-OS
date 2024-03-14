@@ -1,0 +1,139 @@
+From 1cd41f0223c0d8852542f9c4f62ec13aa9015b94 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 4 Mar 2024 14:13:41 +0530
+Subject: [PATCH] second ethernet support
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi |  5 +++
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 39 ++++++++++++++-------
+ arch/arm/boot/dts/imx7d.dtsi                | 17 ++++++++-
+ 3 files changed, 48 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 326440f2b4f4..ee16645cb17e 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -52,6 +52,11 @@ &fec1 {
+ 	status = "okay";
+ };
+ 
++/* Colibri Second Ethernet */
++&fec2 {
++	status = "okay";
++};
++
+ /* Colibri I2C: I2C3_SDA/SCL on SODIMM 194/196 */
+ &i2c4 {
+ 	status = "okay";
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 9f0167eee80d..8b69ed2b8c2e 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -727,6 +727,21 @@ MX7D_PAD_SD2_WP__GPIO5_IO10			0x0
+ 		>;
+ 	};
+ 
++	pinctrl_enet2: enet1grp {
++                fsl,pins = <
++			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2	0x73
++			MX7D_PAD_GPIO1_IO15__ENET2_MDC       		0x3
++			MX7D_PAD_GPIO1_IO14__ENET2_MDIO			0x3
++			MX7D_PAD_EPDC_SDCLK__ENET2_RGMII_RD0   		0x73
++			MX7D_PAD_EPDC_SDLE__ENET2_RGMII_RD1 		0x73
++			MX7D_PAD_EPDC_SDCE0__ENET2_RGMII_RX_CTL 	0x73
++			MX7D_PAD_EPDC_SDCE1__ENET2_RX_ER   		0x73
++			MX7D_PAD_EPDC_SDCE2__ENET2_RGMII_TD0 		0x73
++			MX7D_PAD_EPDC_SDCE3__ENET2_RGMII_TD1		0x73
++			MX7D_PAD_EPDC_GDRL__ENET2_RGMII_TX_CTL		0x73
++                >;
++        };
++
+ 	pinctrl_flexcan1: flexcan1grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_RD2__FLEXCAN1_RX	0x79 /* SODIMM 63 */
+@@ -736,8 +751,8 @@ MX7D_PAD_ENET1_RGMII_RD3__FLEXCAN1_TX	0x79 /* SODIMM 55 */
+ 
+ 	pinctrl_flexcan2: flexcan2grp {
+ 		fsl,pins = <
+-			MX7D_PAD_GPIO1_IO14__FLEXCAN2_RX	0x79 /* SODIMM 188 */
+-			MX7D_PAD_GPIO1_IO15__FLEXCAN2_TX	0x79 /* SODIMM 178 */
++		/*	MX7D_PAD_GPIO1_IO14__FLEXCAN2_RX	0x79 *//* Anztec SODIMM 188 */
++		/*	MX7D_PAD_GPIO1_IO15__FLEXCAN2_TX	0x79 *//* Anztec SODIMM 178 */
+ 		>;
+ 	};
+ 
+@@ -760,16 +775,16 @@ MX7D_PAD_EPDC_DATA11__GPIO2_IO11	0x14 /* SODIMM 152 */
+ 			MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x14 /* SODIMM 126 */
+ 			MX7D_PAD_EPDC_GDCLK__GPIO2_IO24		0x14 /* SODIMM 132 */
+ 			MX7D_PAD_EPDC_GDOE__GPIO2_IO25		0x14 /* SODIMM 134 */
+-			MX7D_PAD_EPDC_GDRL__GPIO2_IO26		0x14 /* SODIMM 133 */
++		/*	MX7D_PAD_EPDC_GDRL__GPIO2_IO26		0x14 *//* Anztec SODIMM 133 */
+ 			MX7D_PAD_EPDC_GDSP__GPIO2_IO27		0x14 /* SODIMM 104 */
+ 			MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x14 /* SODIMM 112 */
+ 			MX7D_PAD_EPDC_PWR_STAT__GPIO2_IO31	0x14 /* SODIMM 128 */
+-			MX7D_PAD_EPDC_SDCE0__GPIO2_IO20		0x14 /* SODIMM 122 */
+-			MX7D_PAD_EPDC_SDCE1__GPIO2_IO21		0x14 /* SODIMM 124 */
+-			MX7D_PAD_EPDC_SDCE2__GPIO2_IO22		0x14 /* SODIMM 127 */
+-			MX7D_PAD_EPDC_SDCE3__GPIO2_IO23		0x14 /* SODIMM 130 */
+-			MX7D_PAD_EPDC_SDCLK__GPIO2_IO16		0x14 /* SODIMM 114 */
+-			MX7D_PAD_EPDC_SDLE__GPIO2_IO17		0x14 /* SODIMM 116 */
++		/*	MX7D_PAD_EPDC_SDCE0__GPIO2_IO20		0x14 *//* Anztec SODIMM 122 */
++		/*	MX7D_PAD_EPDC_SDCE1__GPIO2_IO21		0x14 *//* Anztec SODIMM 124 */
++		/*	MX7D_PAD_EPDC_SDCE2__GPIO2_IO22		0x14 *//* Anztec SODIMM 127 */
++		/*	MX7D_PAD_EPDC_SDCE3__GPIO2_IO23		0x14 *//* SODIMM 130 */
++		/*	MX7D_PAD_EPDC_SDCLK__GPIO2_IO16		0x14 *//* Anztec SODIMM 114 */
++		/*	MX7D_PAD_EPDC_SDLE__GPIO2_IO17		0x14 *//* Anztec SODIMM 116 */
+ 			MX7D_PAD_EPDC_SDOE__GPIO2_IO18		0x14 /* SODIMM 118 */
+ 			MX7D_PAD_EPDC_SDSHR__GPIO2_IO19		0x14 /* SODIMM 120 */
+ 			MX7D_PAD_LCD_RESET__GPIO3_IO4		0x14 /* SODIMM 93 */
+@@ -814,8 +829,8 @@ MX7D_PAD_LCD_DATA23__GPIO3_IO28		0x74 /* SODIMM 146 */
+ 
+ 	pinctrl_gpio4: gpio4grp { /* Alternatively CAN2 */
+ 		fsl,pins = <
+-			MX7D_PAD_GPIO1_IO14__GPIO1_IO14		0x14 /* SODIMM 188 */
+-			MX7D_PAD_GPIO1_IO15__GPIO1_IO15		0x14 /* SODIMM 178 */
++		/*	MX7D_PAD_GPIO1_IO14__GPIO1_IO14		0x14 *//* Anztec SODIMM 188 */
++		/*	MX7D_PAD_GPIO1_IO15__GPIO1_IO15		0x14 *//* Anztec SODIMM 178 */
+ 		>;
+ 	};
+ 
+@@ -1128,7 +1143,7 @@ MX7D_PAD_LPSR_GPIO1_IO00__GPIO1_IO0	0x0
+ 	pinctrl_gpio_lpsr: gpiolpsrgrp {
+ 		fsl,pins = <
+ 			MX7D_PAD_LPSR_GPIO1_IO02__GPIO1_IO2	0x59 /* SODIMM 135 */
+-			MX7D_PAD_LPSR_GPIO1_IO03__GPIO1_IO3	0x59 /* SODIMM 22 */
++		/*	MX7D_PAD_LPSR_GPIO1_IO03__GPIO1_IO3	0x59 *//* Anztec SODIMM 22 */
+ 		>;
+ 	};
+ 
+diff --git a/arch/arm/boot/dts/imx7d.dtsi b/arch/arm/boot/dts/imx7d.dtsi
+index 7ceb7c09f7ad..16aaec74e80e 100644
+--- a/arch/arm/boot/dts/imx7d.dtsi
++++ b/arch/arm/boot/dts/imx7d.dtsi
+@@ -203,7 +203,22 @@ fec2: ethernet@30bf0000 {
+ 		fsl,num-tx-queues = <3>;
+ 		fsl,num-rx-queues = <3>;
+ 		fsl,stop-mode = <&gpr 0x10 4>;
+-		status = "disabled";
++		phy-handle = <&ethphy1>;
++		phy-mode = "rmii";
++		phy-sypply = <&reg_module_3v3_eth>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_enet2>;
++		fsl,mii-exclusive;
++		mdio {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			/* KSZ8041NL */
++			ethphy1: ethernet-phy@0 {
++				compatible = "ethernet-phy-ieee802.3-c22";
++				max-speed = <100>;
++				reg = <0>;
++				};
++		};
+ 	};
+ };
+ 
+-- 
+2.25.1
+

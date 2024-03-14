@@ -1,0 +1,33 @@
+From 02f1d92ee4c3014f16b56f48ef4c557400627be2 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Tue, 12 Mar 2024 12:35:26 +0530
+Subject: [PATCH] sd card non removable
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index e5fcff113a02..87abcce486ea 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -635,7 +635,6 @@ &usbotg1 {
+ 
+ /* Colibri MMC/SD */
+ &usdhc1 {
+-	cd-gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
+ 	disable-wp;
+ 	no-1-8-v;
+ 	pinctrl-names = "default", "state_100mhz", "state_200mhz", "sleep";
+@@ -645,7 +644,7 @@ &usdhc1 {
+ 	pinctrl-3 = <&pinctrl_usdhc1_sleep &pinctrl_cd_usdhc1_sleep>;
+ 	vmmc-supply = <&reg_3v3>;
+ 	vqmmc-supply = <&reg_LDO2>;
+-	wakeup-source;
++	non-removable;
+ };
+ 
+ /* eMMC on 1GB (eMMC) SKUs */
+-- 
+2.25.1
+

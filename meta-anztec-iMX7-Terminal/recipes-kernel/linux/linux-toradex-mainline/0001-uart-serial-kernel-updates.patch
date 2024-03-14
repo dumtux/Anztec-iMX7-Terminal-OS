@@ -1,0 +1,25 @@
+From bf238859389ac1a8ad27005477262b4e7dc19a06 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Tue, 5 Mar 2024 20:50:52 +0530
+Subject: [PATCH] uart serial kernel updates
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 8b69ed2b8c2e..f5f9c2a18d2d 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -24,7 +24,7 @@ backlight: backlight {
+ 	};
+ 
+ 	chosen {
+-		stdout-path = "serial0:115200n8";
++		stdout-path = "serial6:115200n8";
+ 	};
+ 
+ 	extcon_usbc_det: usbc-det {
+-- 
+2.25.1
+

@@ -6,7 +6,7 @@ DESCRIPTION = "Minimal image without graphical interface that just boots"
 LICENSE = "MIT"
 
 #Prefix to the resulting deployable tarball name
-export IMAGE_BASENAME = "Anztec-iMX7-Terminal-image"
+export IMAGE_BASENAME = "Anztec-iMX7-Terminal-image_11"
 MACHINE_NAME ?= "${MACHINE}"
 IMAGE_NAME = "${MACHINE_NAME}_${IMAGE_BASENAME}"
 
@@ -39,6 +39,7 @@ IMAGE_INSTALL += " \
     ethtool \
     iproute2 \
     iperf3 \
+    net-tools \
     ${CONMANPKGS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'timestamp-service systemd-analyze', '', d)} \
 "

@@ -1,0 +1,93 @@
+From 9afa1c26df51b49a633266c0fcd763ce86156bf0 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 13 Mar 2024 13:05:35 +0530
+Subject: [PATCH] micro SD card enable
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi |  5 +++
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 35 +++++++++++++++++----
+ 2 files changed, 34 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index fadd5026d10c..a96829edc9b3 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -119,3 +119,8 @@ &usbotg1 {
+ &usdhc1 {
+ 	status = "okay";
+ };
++
++/* Anztec Colibri Micro SD card */
++&usdhc2 {
++	status = "okay";
++};
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 87abcce486ea..df56b2f1f297 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -647,6 +647,18 @@ &usdhc1 {
+ 	non-removable;
+ };
+ 
++/*Anztec Colibri Micro SD card */
++&usdhc2 {
++        disable-wp;
++        no-1-8-v;
++        pinctrl-names = "default";
++        pinctrl-0 = <&pinctrl_usdhc2>;
++        vmmc-supply = <&reg_3v3>;
++        vqmmc-supply = <&reg_LDO2>;
++        wakeup-source;
++	non-removable;
++};
++
+ /* eMMC on 1GB (eMMC) SKUs */
+ &usdhc3 {
+ 	assigned-clocks = <&clks IMX7D_USDHC3_ROOT_CLK>;
+@@ -801,10 +813,10 @@ MX7D_PAD_LCD_RESET__GPIO3_IO4		0x14 /* SODIMM 93 */
+ 			MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x14 /* SODIMM 24 */
+ 			MX7D_PAD_SAI1_RX_DATA__GPIO6_IO12	0x14 /* SODIMM 169 */
+ 			MX7D_PAD_SAI1_RX_SYNC__GPIO6_IO16	0x14 /* SODIMM 77 */
+-			MX7D_PAD_SD2_CLK__GPIO5_IO12		0x14 /* SODIMM 184 */
+-			MX7D_PAD_SD2_CMD__GPIO5_IO13		0x14 /* SODIMM 186 */
+-			MX7D_PAD_SD2_DATA2__GPIO5_IO16		0x14 /* SODIMM 100 */
+-			MX7D_PAD_SD2_DATA3__GPIO5_IO17		0x14 /* SODIMM 102 */
++		/*	MX7D_PAD_SD2_CLK__GPIO5_IO12		0x14 *//* Anztec SODIMM 184 */
++		/*	MX7D_PAD_SD2_CMD__GPIO5_IO13		0x14 *//* Anztec SODIMM 186 */
++		/*	MX7D_PAD_SD2_DATA2__GPIO5_IO16		0x14 *//* Anztec SODIMM 100 */
++		/*	MX7D_PAD_SD2_DATA3__GPIO5_IO17		0x14 *//* Anztec SODIMM 102 */
+ 			MX7D_PAD_UART3_RTS_B__GPIO4_IO6		0x14 /* SODIMM 131 */
+ 		>;
+ 	};
+@@ -985,8 +997,8 @@ MX7D_PAD_UART1_TX_DATA__UART1_DTE_RX	0x79 /* SODIMM 33 */
+ 
+ 	pinctrl_uart1_ctrl1: uart1ctrl1grp {
+ 		fsl,pins = <
+-			MX7D_PAD_SD2_DATA0__GPIO5_IO14		0x14 /* SODIMM 23 / DTR */
+-			MX7D_PAD_SD2_DATA1__GPIO5_IO15		0x14 /* SODIMM 31 / DCD */
++		/*	MX7D_PAD_SD2_DATA0__GPIO5_IO14		0x14 *//* Anztec SODIMM 23 / DTR */
++		/*	MX7D_PAD_SD2_DATA1__GPIO5_IO15		0x14 *//* Anztec SODIMM 31 / DCD */
+ 		>;
+ 	};
+ 
+@@ -1070,6 +1082,17 @@ MX7D_PAD_SD1_DATA3__SD1_DATA3		0x10
+ 		>;
+ 	};
+ 
++	pinctrl_usdhc2: usdhc2grp {
++                fsl,pins = <
++                        MX7D_PAD_SD2_DATA0__SD2_DATA0           0x59 /* SODIMM 23 */
++                        MX7D_PAD_SD2_DATA1__SD2_DATA1           0x59 /* SODIMM 31 */
++                        MX7D_PAD_SD2_DATA2__SD2_DATA2           0x59 /* SODIMM 100 */
++                        MX7D_PAD_SD2_DATA3__SD2_DATA3           0x59 /* SODIMM 102 */
++                        MX7D_PAD_SD2_CMD__SD2_CMD               0x59 /* SODIMM 186 */
++                        MX7D_PAD_SD2_CLK__SD2_CLK               0x19 /* SODIMM 184 */
++                >;
++        };
++
+ 	pinctrl_usdhc3: usdhc3grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_SD3_CLK__SD3_CLK		0x19
+-- 
+2.25.1
+

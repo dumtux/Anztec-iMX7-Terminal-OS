@@ -1,0 +1,28 @@
+From a1b1e94104a8403ca8be805dd74427570e0cf5ee Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Tue, 5 Mar 2024 17:17:23 +0530
+Subject: [PATCH] additional uart kernel change
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index ee16645cb17e..6eb906855e3e 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -94,6 +94,11 @@ &uart1 {
+ 	status = "okay";
+ };
+ 
++/* Colibri UART_G */
++&uart7 {
++	status = "okay";
++};
++
+ /* Colibri UART_B */
+ &uart2 {
+ 	status = "okay";
+-- 
+2.25.1
+

@@ -1,0 +1,70 @@
+From ae3e2c57fff31e869c946e1568be4443bb227408 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Sat, 2 Mar 2024 13:47:05 +0530
+Subject: [PATCH] uart u-boot change
+
+---
+ arch/arm/dts/imx7-colibri-emmc.dts        |  2 +-
+ board/toradex/colibri_imx7/colibri_imx7.c | 12 ++++++------
+ include/configs/colibri_imx7.h            |  2 +-
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/dts/imx7-colibri-emmc.dts b/arch/arm/dts/imx7-colibri-emmc.dts
+index 8545498275..4d284a7a53 100644
+--- a/arch/arm/dts/imx7-colibri-emmc.dts
++++ b/arch/arm/dts/imx7-colibri-emmc.dts
+@@ -19,7 +19,7 @@
+ 	};
+ 
+ 	chosen {
+-		stdout-path = &uart1;
++		stdout-path = &uart7;
+ 	};
+ 
+ 	reg_5v0: regulator-5v0 {
+diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
+index 486299b5e9..0cdb34bbc1 100644
+--- a/board/toradex/colibri_imx7/colibri_imx7.c
++++ b/board/toradex/colibri_imx7/colibri_imx7.c
+@@ -60,11 +60,11 @@ int dram_init(void)
+ 	return 0;
+ }
+ 
+-static iomux_v3_cfg_t const uart1_pads[] = {
+-	MX7D_PAD_UART1_RX_DATA__UART1_DTE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	MX7D_PAD_UART1_TX_DATA__UART1_DTE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	MX7D_PAD_SAI2_TX_BCLK__UART1_DTE_CTS | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	MX7D_PAD_SAI2_TX_SYNC__UART1_DTE_RTS | MUX_PAD_CTRL(UART_PAD_CTRL),
++static iomux_v3_cfg_t const uart7_pads[] = {
++	MX7D_PAD_EPDC_DATA12__UART7_DTE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX7D_PAD_EPDC_DATA13__UART7_DTE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX7D_PAD_ECSPI2_SS0__UART7_DTE_RTS | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX7D_PAD_ECSPI2_MISO__UART7_DTE_CTS | MUX_PAD_CTRL(UART_PAD_CTRL),
+ };
+ 
+ #ifdef CONFIG_USB_EHCI_MX7
+@@ -142,7 +142,7 @@ void board_preboot_os(void)
+ 
+ static void setup_iomux_uart(void)
+ {
+-	imx_iomux_v3_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
++	imx_iomux_v3_setup_multiple_pads(uart7_pads, ARRAY_SIZE(uart7_pads));
+ }
+ 
+ #ifdef CONFIG_FEC_MXC
+diff --git a/include/configs/colibri_imx7.h b/include/configs/colibri_imx7.h
+index 3dba7bcef2..8b38ebe599 100644
+--- a/include/configs/colibri_imx7.h
++++ b/include/configs/colibri_imx7.h
+@@ -132,7 +132,7 @@
+ 	"boot_file=zImage\0" \
+ 	"boot_script_dhcp=boot.scr\0" \
+ 	"bootubipart=ubi\0" \
+-	"console=ttymxc0\0" \
++	"console=ttymxc6\0" \
+ 	"defargs=\0" \
+ 	"fdt_board=eval-v3\0" \
+ 	"fdt_fixup=;\0" \
+-- 
+2.25.1
+
