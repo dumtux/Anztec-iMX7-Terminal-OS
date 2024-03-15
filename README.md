@@ -93,6 +93,43 @@ Another way to confirm the layer added by using
 
 $ vim build/conf/bblayers.conf
 
+### Add the u-boot changes into the image 
+
+First find the u-boot version using u-boot while board boot
+
+Power up the board and stop in the u-boot then enter any key to stop then enter the below command 
+
+$ version 
+
+now we can see the version of the u-boot 
+
+Another way of finding u-boot version go to build directory 
+
+$ cd oe-core
+
+$ . export
+
+$ bitbake -e virtual/bootloader | grep '^PV='
+
+this will result like PV="2022.07"
+
+Now go to the layers and find the file
+
+$ cd oe-core/layers
+$ find ./ -name "*2022.07*"
+
+this will result the location of the file
+then go to the file directory and open the .bb file and add the patch files in the "TDX_PATCHES = " veriable
+also copy the u-boot changes patchs and paste in the .bb file location by below steps
+
+$ cp <u-boot-changes>.patch ../../../layers/meta-toradex-bsp-common/recipes-bsp/u-boot/u-boot-toradex
+
+Now build the u-boot source by using the below command
+
+$ cd oe-core
+$ . export
+$ bitbake u-boot-toradex
+
 ### Build an Image
 
 For building the image go to the build environment and execute the below command
