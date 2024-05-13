@@ -1,0 +1,24 @@
+From 8b38b8f3b1d1285b24416691eb1941c786f37514 Mon Sep 17 00:00:00 2001
+From: dineshneevee <dinesh@neeveetech.com>
+Date: Wed, 17 Apr 2024 19:12:39 +0530
+Subject: [PATCH] lcd data pin change
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 76b5cd1fbd9f..e10b08db1b8a 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -594,7 +594,6 @@ &lcdif {
+ 	assigned-clock-parents = <&clks IMX7D_PLL_VIDEO_POST_DIV>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_lcdif_dat
+-		     &pinctrl_lcdif_dat_24
+ 		     &pinctrl_lcdif_ctrl>;
+ 	status = "disabled";
+ 
+-- 
+2.25.1
+

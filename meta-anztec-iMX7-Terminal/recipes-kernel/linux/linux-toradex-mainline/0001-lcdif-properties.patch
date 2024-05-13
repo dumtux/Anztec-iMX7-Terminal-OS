@@ -1,0 +1,48 @@
+From 230c3a75d4bde99e53b8de58c612af922838debe Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 13 May 2024 14:23:05 +0530
+Subject: [PATCH] lcdif-properties.patch
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 27 +++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 4ff83390e4ad..ec00ee7fc2fb 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -156,4 +156,31 @@ &panel_dpi {
+ /* Anztec Colibri LCD Display */
+ &lcdif{
+        status = "okay";
++       display = <&display0>;
++       lcd-supply = <&reg_3v3>;
++       status = "okay";
++
++       display0: lcd-display {
++               bits-per-pixel = <18>;
++               bus-width = <18>;
++
++               display-timings {
++                       native-mode = <&timing_wxga>;
++                       timing_wxga: 1280x800 {
++                               clock-frequency = <23702400>;
++                               hactive = <1280>;
++                               vactive = <800>;
++                               hfront-porch = <70>;
++                               hback-porch = <70>;
++                               hsync-len = <20>;
++                               vback-porch = <10>;
++                               vfront-porch = <10>;
++                               vsync-len = <3>;
++                               de-active = <1>;
++                               hsync-active = <1>;
++                               vsync-active = <1>;
++                               pixelclk-active = <1>;
++                       };
++               };
++	};
+ };
+-- 
+2.25.1
+

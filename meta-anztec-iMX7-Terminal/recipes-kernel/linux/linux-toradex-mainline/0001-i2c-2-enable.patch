@@ -1,0 +1,76 @@
+From adb9bfc7eef4475ebe9e01e78652ced45e490fe5 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 18 Mar 2024 20:09:04 +0530
+Subject: [PATCH] i2c 2 enable
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi |  4 ++++
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 23 ++++++++++++++++++---
+ 2 files changed, 24 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index a1e818c2f7c6..126fa27076a2 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -57,6 +57,10 @@ &fec2 {
+ 	status = "okay";
+ };
+ 
++&i2c2 {
++	status = "okay";
++};
++
+ &i2c3 {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index c189bd4c52c6..d6378b5b25bf 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -546,7 +546,17 @@ hdc2080: humidity@40 {
+ 	};
+ };
+ 
+-/* Colibri I2C: I2C4_SDA/SCL on SODIMM 94/81 */
++/* Colibri I2C: I2C2_SDA/SCL on SODIMM 94/81 */
++&i2c2 {
++        clock-frequency = <100000>;
++        pinctrl-names = "default";
++        pinctrl-0 = <&pinctrl_i2c2>;
++        scl-gpios = <&gpio1 6 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++        sda-gpios = <&gpio1 7 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++        status = "disabled";
++};
++
++/* Colibri I2C: I2C3_SDA/SCL on SODIMM 94/81 */
+ &i2c3 {
+         clock-frequency = <100000>;
+         pinctrl-names = "default";
+@@ -945,6 +955,13 @@ MX7D_PAD_I2C3_SDA__I2C3_SDA		0x4000007f /* SODIMM 94 */
+                 >;
+         };
+ 
++	pinctrl_i2c2: i2c2grp {
++                fsl,pins = <
++                        MX7D_PAD_LPSR_GPIO1_IO06__I2C2_SCL	0x4000007f /* SODIMM 37 */
++                        MX7D_PAD_LPSR_GPIO1_IO07__I2C2_SDA	0x4000007f /* SODIMM 29 */
++                >;
++        };
++
+ 	pinctrl_i2c4_recovery: i2c4-recoverygrp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_TD2__GPIO7_IO8	0x4000007f
+@@ -1263,8 +1280,8 @@ MX7D_PAD_LPSR_GPIO1_IO05__GPIO1_IO5	0x4000007f
+ 
+ 	pinctrl_uart1_ctrl2: uart1ctrl2grp {
+ 		fsl,pins = <
+-			MX7D_PAD_LPSR_GPIO1_IO06__GPIO1_IO6	0x14 /* SODIMM 37 / RI */
+-			MX7D_PAD_LPSR_GPIO1_IO07__GPIO1_IO7	0x14 /* SODIMM 29 / DSR */
++		/*	MX7D_PAD_LPSR_GPIO1_IO06__GPIO1_IO6	0x14 *//* Anztec SODIMM 37 / RI */
++		/*	MX7D_PAD_LPSR_GPIO1_IO07__GPIO1_IO7	0x14 *//* Anztec SODIMM 29 / DSR */
+ 		>;
+ 	};
+ };
+-- 
+2.25.1
+

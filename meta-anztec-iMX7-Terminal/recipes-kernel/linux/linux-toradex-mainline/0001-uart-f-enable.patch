@@ -1,0 +1,89 @@
+From 2c23777a23fe8eec4fcfa3fc6f4cf2282db40fbe Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 18 Mar 2024 14:03:42 +0530
+Subject: [PATCH] uart f enable
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi |  5 +++++
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 22 ++++++++++++++++++---
+ 2 files changed, 24 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 24db5e3dd7df..c81330ddadac 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -114,6 +114,11 @@ &uart4 {
+ 	status = "okay";
+ };
+ 
++/* Colibri UART_F */
++&uart6 {
++	status = "okay";
++};
++
+ /* Colibri USBC */
+ &usbotg1 {
+ 	disable-over-current;
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index e3bb453c099f..63e18dbea68a 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -635,6 +635,15 @@ &uart4 {
+ 	uart-has-rtscts;
+ };
+ 
++/* Colibri UART_F */
++&uart6 {
++	assigned-clocks = <&clks IMX7D_UART6_ROOT_SRC>;
++	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
++	fsl,dte-mode;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart6>;
++};
++
+ /* Colibri UART_G */
+ &uart7 {
+ 	assigned-clocks = <&clks IMX7D_UART7_ROOT_SRC>;
+@@ -844,14 +853,14 @@ pinctrl_gpio2: gpio2grp { /* On X22 Camera interface */
+ 			MX7D_PAD_ECSPI1_MISO__GPIO4_IO18	0x14 /* SODIMM 79 */
+ 			MX7D_PAD_ECSPI1_MOSI__GPIO4_IO17	0x14 /* SODIMM 103 */
+ 			MX7D_PAD_ECSPI1_SCLK__GPIO4_IO16	0x14 /* SODIMM 101 */
+-			MX7D_PAD_ECSPI1_SS0__GPIO4_IO19		0x14 /* SODIMM 97 */
++		/*	MX7D_PAD_ECSPI1_SS0__GPIO4_IO19		0x14 *//* Anztec SODIMM 97 */
+ 		/*	MX7D_PAD_ECSPI2_MISO__GPIO4_IO22	0x14 *//* Anztec SODIMM 85 */
+ 		/*	MX7D_PAD_ECSPI2_SS0__GPIO4_IO23		0x14 *//* Anztec SODIMM 65 */
+ 			MX7D_PAD_I2C3_SCL__GPIO4_IO12		0x14 /* SODIMM 81 */
+ 			MX7D_PAD_I2C3_SDA__GPIO4_IO13		0x14 /* SODIMM 94 */
+ 			MX7D_PAD_I2C4_SCL__GPIO4_IO14		0x14 /* SODIMM 96 */
+ 			MX7D_PAD_I2C4_SDA__GPIO4_IO15		0x14 /* SODIMM 75 */
+-			MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x74 /* SODIMM 69 */
++		/*	MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x74 *//* Anztec SODIMM 69 */
+ 			MX7D_PAD_SD2_RESET_B__GPIO5_IO11	0x14 /* SODIMM 98 */
+ 		>;
+ 	};
+@@ -883,7 +892,7 @@ MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x14 /* SODIMM 55 */
+ 
+ 	pinctrl_gpio_bl_on: gpioblongrp {
+ 		fsl,pins = <
+-			MX7D_PAD_SD1_WP__GPIO5_IO1		0x14 /* SODIMM 71 */
++		/*	MX7D_PAD_SD1_WP__GPIO5_IO1		0x14 *//* Anztec SODIMM 71 */
+ 		>;
+ 	};
+ 
+@@ -1052,6 +1061,13 @@ MX7D_PAD_SAI2_TX_DATA__UART4_DTE_CTS	0x79 /* SODIMM 34 */
+ 			MX7D_PAD_SAI2_RX_DATA__UART4_DTE_RTS	0x79 /* SODIMM 32 */
+ 		>;
+ 	};
++	pinctrl_uart6: uart6grp {
++		fsl,pins = <
++			MX7D_PAD_SD1_CD_B__UART6_DTE_TX		0x79 /* SODIMM 69 */
++			MX7D_PAD_SD1_WP__UART6_DTE_RX		0x79 /* SODIMM 71 */
++			MX7D_PAD_ECSPI1_SS0__UART6_DTE_RTS	0x79 /* SODIMM 97 */
++		>;
++	};
+ 
+ 	pinctrl_usbc_det: usbcdetgrp {
+ 		fsl,pins = <
+-- 
+2.25.1
+

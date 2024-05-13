@@ -1,0 +1,39 @@
+From 625b46b5fe7620011a01a1e193bb8b142ecdeca3 Mon Sep 17 00:00:00 2001
+From: dineshneevee <dinesh@neeveetech.com>
+Date: Mon, 6 May 2024 14:19:42 +0530
+Subject: [PATCH] lcd pclk as gpio
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 2 +-
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index f297029edf95..037a2795f441 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -166,7 +166,7 @@ display0: lcd-display {
+ 		display-timings {
+ 			native-mode = <&timing_wxga>;
+ 			timing_wxga: 1280x800 {
+-				clock-frequency = <29628000>;
++				clock-frequency = <35553600>;
+ 				hactive = <1280>;
+ 				vactive = <800>;
+ 				hfront-porch = <70>;
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index e10b08db1b8a..706b0b87b67d 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -1038,7 +1038,7 @@ pinctrl_lcdif_ctrl: lcdifctrlgrp {
+ 			MX7D_PAD_EPDC_PWR_COM__LCD_HSYNC	0x79 /* SODIMM 112 */
+ 			MX7D_PAD_EPDC_DATA02__LCD_VSYNC		0x79 /* SODIMM 115 */
+ 			MX7D_PAD_LCD_ENABLE__LCD_ENABLE         0x79 /* SODIMM 44 */
+-			MX7D_PAD_LCD_CLK__LCD_CLK               0x79 /* SODIMM 56 */
++		/*	MX7D_PAD_LCD_CLK__LCD_CLK               0x79 */ /* SODIMM 56 */
+ 		>;
+ 	};
+ 
+-- 
+2.25.1
+

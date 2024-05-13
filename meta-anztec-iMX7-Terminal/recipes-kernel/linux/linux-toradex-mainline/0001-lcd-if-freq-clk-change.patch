@@ -1,0 +1,25 @@
+From 705a4b9b8e05faecf7b239c6ff3241968932d840 Mon Sep 17 00:00:00 2001
+From: dineshneevee <dinesh@neeveetech.com>
+Date: Tue, 30 Apr 2024 17:17:06 +0530
+Subject: [PATCH] lcd if freq clk change
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index b60f203f558b..8f50bfc0e1ed 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -166,7 +166,7 @@ display0: lcd-display {
+ 		display-timings {
+ 			native-mode = <&timing_wxga>;
+ 			timing_wxga: 1280x800 {
+-				clock-frequency = <128571429>;
++				clock-frequency = <132571429>;
+ 				hactive = <1280>;
+ 				vactive = <800>;
+ 				hfront-porch = <70>;
+-- 
+2.25.1
+

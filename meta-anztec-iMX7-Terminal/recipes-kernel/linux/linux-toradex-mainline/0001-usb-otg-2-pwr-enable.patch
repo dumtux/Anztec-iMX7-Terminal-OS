@@ -1,0 +1,62 @@
+From 2820e9123a8f7d2573393f680e7db590e8ef5406 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Sat, 23 Mar 2024 19:06:48 +0530
+Subject: [PATCH] usb otg 2 pwr enable
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi       | 18 ++++++++++++++++++
+ arch/arm/boot/dts/imx7d-colibri-emmc.dtsi |  2 +-
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 3722c1eed225..f62047b69f11 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -127,6 +127,18 @@ reg_usbh_vbus: regulator-usbh-vbus {
+ 		vin-supply = <&reg_5v0>;
+ 	};
+ 
++	reg_usbh_vbus_new: regulator-usbh-vbus-new {
++		compatible = "regulator-fixed";
++		gpio = <&gpio4 5 GPIO_ACTIVE_LOW>; /* SODIMM 19 / USBH_PEN */
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_usbh_reg_new>;
++		regulator-max-microvolt = <3300000>;
++		regulator-min-microvolt = <3300000>;
++		regulator-name = "VCC_USB[1-4]";
++		vin-supply = <&reg_3v3>;
++		regulator-always-on;
++	};
++
+ 	sound {
+ 		compatible = "simple-audio-card";
+ 		simple-audio-card,bitclock-master = <&dailink_master>;
+@@ -1125,6 +1137,12 @@ MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* SODIMM 129 / USBH_PEN */
+ 		>;
+ 	};
+ 
++	pinctrl_usbh_reg_new: usbhreggrp {
++                fsl,pins = <
++                        MX7D_PAD_UART3_TX_DATA__GPIO4_IO5         0x14 /* SODIMM 19 / USBH_PEN */
++                >;
++        };
++
+ 	pinctrl_usdhc1: usdhc1grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_SD1_CLK__SD1_CLK		0x19 /* SODIMM 47 */
+diff --git a/arch/arm/boot/dts/imx7d-colibri-emmc.dtsi b/arch/arm/boot/dts/imx7d-colibri-emmc.dtsi
+index 3740e34ef99f..451b9b6f6540 100644
+--- a/arch/arm/boot/dts/imx7d-colibri-emmc.dtsi
++++ b/arch/arm/boot/dts/imx7d-colibri-emmc.dtsi
+@@ -53,7 +53,7 @@ &gpio6 {
+ &usbotg2 {
+ 	disable-over-current;
+ 	dr_mode = "host";
+-	vbus-supply = <&reg_usbh_vbus>;
++	vbus-supply = <&reg_usbh_vbus_new>;
+ };
+ 
+ /* eMMC */
+-- 
+2.25.1
+

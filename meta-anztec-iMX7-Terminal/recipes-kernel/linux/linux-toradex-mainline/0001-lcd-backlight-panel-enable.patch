@@ -1,0 +1,104 @@
+From 65417f280994875dbe1e37422189842aebf7ea9b Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 13 May 2024 14:16:57 +0530
+Subject: [PATCH] lcd-backlight-panel-enable
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 10 ++++++++++
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 14 ++++++++------
+ 2 files changed, 18 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index dffe24a4190c..4ff83390e4ad 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -143,6 +143,16 @@ &usdhc2 {
+ 	status = "okay";
+ };
+ 
++/* Anztec Colibri Backlight */
++&backlight {
++       status = "okay";
++};
++
++/* Anztec Colibri panel_dpi */
++&panel_dpi {
++       status = "okay";
++};
++
+ /* Anztec Colibri LCD Display */
+ &lcdif{
+        status = "okay";
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 3cdfa9653434..3164344d326e 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -15,11 +15,11 @@ backlight: backlight {
+ 		brightness-levels = <0 45 63 88 119 158 203 255>;
+ 		compatible = "pwm-backlight";
+ 		default-brightness-level = <4>;
+-		enable-gpios = <&gpio5 1 GPIO_ACTIVE_HIGH>;
++		enable-gpios = <&gpio7 2 GPIO_ACTIVE_HIGH>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_gpio_bl_on>;
+ 		power-supply = <&reg_module_3v3>;
+-		pwms = <&pwm1 0 6666667 PWM_POLARITY_INVERTED>;
++		pwms = <&pwm2 0 6666667 PWM_POLARITY_INVERTED>;
+ 		status = "disabled";
+ 	};
+ 
+@@ -843,7 +843,7 @@ MX7D_PAD_EPDC_GDRL__ENET2_RGMII_TX_CTL          0x73 /* SOIDMM 133 */
+ 
+ 	pinctrl_flexcan1: flexcan1grp {
+ 		fsl,pins = <
+-			MX7D_PAD_ENET1_RGMII_RD2__FLEXCAN1_RX	0x79 /* SODIMM 63 */
++		/*	MX7D_PAD_ENET1_RGMII_RD2__FLEXCAN1_RX	0x79 *//* SODIMM 63 */
+ 		/*	MX7D_PAD_ENET1_RGMII_RD3__FLEXCAN1_TX	0x79 *//* Anztec SODIMM 55 */
+ 		>;
+ 	};
+@@ -935,7 +935,7 @@ pinctrl_gpio4: gpio4grp { /* Alternatively CAN2 */
+ 
+ 	pinctrl_gpio7: gpio7grp { /* Alternatively CAN1 */
+ 		fsl,pins = <
+-			MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2	0x14 /* SODIMM 63 */
++		/*	MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2	0x14 *//* SODIMM 63 */
+ 		/*	MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x14 *//* Anztec SODIMM 55 */
+ 		>;
+ 	};
+@@ -943,6 +943,7 @@ MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2	0x14 /* SODIMM 63 */
+ 	pinctrl_gpio_bl_on: gpioblongrp {
+ 		fsl,pins = <
+ 		/*	MX7D_PAD_SD1_WP__GPIO5_IO1		0x14 *//* Anztec SODIMM 71 */
++			MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2     0x14   /* Anztec SODIMM 63 */
+ 		>;
+ 	};
+ 
+@@ -1050,7 +1051,7 @@ MX7D_PAD_LCD_CLK__LCD_CLK               0x79 /* SODIMM 56 */
+ 
+ 	pinctrl_lvds_transceiver: lvdstx {
+ 		fsl,pins = <
+-			MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2     0x14 /* SODIMM 63 */
++		/*	MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2     0x14 *//* SODIMM 63 */
+ 		/*	MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3     0x74 *//* Anztec SODIMM 55 */
+ 			MX7D_PAD_ENET1_RGMII_TXC__GPIO7_IO11    0x14 /* SODIMM 99 */
+ 		/*	MX7D_PAD_EPDC_DATA13__GPIO2_IO13        0x14 *//* Anztec SODIMM 95 */
+@@ -1067,6 +1068,7 @@ MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21	0x4  /* SODIMM 59 */
+ 	pinctrl_pwm2: pwm2grp {
+ 		fsl,pins = <
+ 		/*	MX7D_PAD_GPIO1_IO09__PWM2_OUT		0x79 *//* Anztec SODIMM 28 */
++			MX7D_PAD_LPSR_GPIO1_IO02__PWM2_OUT      0x79   /* Anztec SODIMM 135 */
+ 		>;
+ 	};
+ 
+@@ -1295,7 +1297,7 @@ MX7D_PAD_LPSR_GPIO1_IO00__GPIO1_IO0	0x0
+ 
+ 	pinctrl_gpio_lpsr: gpiolpsrgrp {
+ 		fsl,pins = <
+-			MX7D_PAD_LPSR_GPIO1_IO02__GPIO1_IO2	0x59 /* SODIMM 135 */
++		/*	MX7D_PAD_LPSR_GPIO1_IO02__GPIO1_IO2	0x59 *//* SODIMM 135 */
+ 		/*	MX7D_PAD_LPSR_GPIO1_IO03__GPIO1_IO3	0x59 *//* SODIMM 22 */
+ 		>;
+ 	};
+-- 
+2.25.1
+

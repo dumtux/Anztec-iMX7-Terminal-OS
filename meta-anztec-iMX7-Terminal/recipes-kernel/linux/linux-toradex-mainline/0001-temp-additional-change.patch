@@ -1,0 +1,67 @@
+From 423f7e86b10dab9e88b9b382ed742b5c28434368 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 21 Mar 2024 16:42:48 +0530
+Subject: [PATCH] temp additional change
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 4f73f18c0b88..e88d198fe61f 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -542,6 +542,10 @@ rtc: rtc@68 {
+ 	hdc2080: humidity@40 {
+ 		compatible = "ti,hdc2080";
+ 		reg = <0x40>;
++		pinctrl-name = "default";
++		pinctrl-0 = <&intr_temp_gpio7>;
++		interrupt-parent = <&gpio7>;
++		interrupts = <3 IRQ_TYPE_EDGE_FALLING>;
+ 		status = "okay";
+ 	};
+ };
+@@ -774,7 +778,7 @@ MX7D_PAD_EPDC_GDRL__ENET2_RGMII_TX_CTL		0x73
+ 	pinctrl_flexcan1: flexcan1grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_RD2__FLEXCAN1_RX	0x79 /* SODIMM 63 */
+-			MX7D_PAD_ENET1_RGMII_RD3__FLEXCAN1_TX	0x79 /* SODIMM 55 */
++		/*	MX7D_PAD_ENET1_RGMII_RD3__FLEXCAN1_TX	0x79 *//* Anztec SODIMM 55 */
+ 		>;
+ 	};
+ 
+@@ -866,7 +870,7 @@ pinctrl_gpio4: gpio4grp { /* Alternatively CAN2 */
+ 	pinctrl_gpio7: gpio7grp { /* Alternatively CAN1 */
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2	0x14 /* SODIMM 63 */
+-			MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x14 /* SODIMM 55 */
++		/*	MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x14 *//* Anztec SODIMM 55 */
+ 		>;
+ 	};
+ 
+@@ -908,6 +912,12 @@ MX7D_PAD_ENET1_RGMII_TD3__I2C4_SDA	0x4000007f /* SODIMM 194 */
+ 		>;
+ 	};
+ 
++	intr_temp_gpio7: i2c4intgrp {
++		fsl,pins = <
++			MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x74 /* SODIMM 55 */
++		>;
++	};
++
+ 	pinctrl_i2c4_recovery: i2c4-recoverygrp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_TD2__GPIO7_IO8	0x4000007f
+@@ -961,7 +971,7 @@ MX7D_PAD_LCD_VSYNC__LCD_VSYNC		0x79 /* SODIMM 82 */
+ 	pinctrl_lvds_transceiver: lvdstx {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_RD2__GPIO7_IO2     0x14 /* SODIMM 63 */
+-			MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3     0x74 /* SODIMM 55 */
++		/*	MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3     0x74 *//* Anztec SODIMM 55 */
+ 			MX7D_PAD_ENET1_RGMII_TXC__GPIO7_IO11    0x14 /* SODIMM 99 */
+ 		/*	MX7D_PAD_EPDC_DATA13__GPIO2_IO13        0x14 *//* Anztec SODIMM 95 */
+ 		>;
+-- 
+2.25.1
+

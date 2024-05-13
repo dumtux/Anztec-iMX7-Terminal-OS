@@ -1,0 +1,25 @@
+From 361e43ce57548cf9ae50b89ee68b72014400f793 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 22 Mar 2024 14:05:18 +0530
+Subject: [PATCH] pinctrl changes
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 1059eb9b110c..3722c1eed225 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -738,7 +738,7 @@ &iomuxc {
+ 	pinctrl_atmel_adapter: atmelconnectorgrp {
+ 		fsl,pins = <
+ 		/*	MX7D_PAD_GPIO1_IO09__GPIO1_IO9		0x74 *//* Anztec SODIMM 28 / INT */
+-			MX7D_PAD_GPIO1_IO10__GPIO1_IO10		0x14 /* SODIMM 30 / RST */
++		/*	MX7D_PAD_GPIO1_IO10__GPIO1_IO10		0x14 *//* Anztec SODIMM 30 / RST */
+ 		>;
+ 	};
+ 
+-- 
+2.25.1
+

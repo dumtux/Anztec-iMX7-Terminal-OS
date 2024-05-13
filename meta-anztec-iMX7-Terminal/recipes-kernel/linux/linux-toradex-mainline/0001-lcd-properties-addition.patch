@@ -1,0 +1,42 @@
+commit 3cb3c88570e06bc3b187fb8f8c32e38173f5cc3a
+Author: dineshneevee <dinesh@neeveetech.com>
+Date:   Tue Apr 23 16:46:34 2024 +0530
+
+    lcd properties
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 2198e5d9f7fb..823dc53391a4 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -155,5 +155,31 @@ &panel_dpi {
+ 
+ /* Anztec Colibri LCD Display */
+ &lcdif{
++	display = <&display0>;
++	lcd-supply = <&reg_3v3>;
++
++	display0: lcd-display {
++		bits-per-pixel = <16>;
++		bus-width = <18>;
++
++		display-timings {
++			native-mode = <&timing_1280_800>;
++			timing_1280_800: 1280x800 {
++				clock-frequency = <68571429>;
++				hactive = <1280>;
++				vactive = <800>;
++				hfront-porch = <70>;
++				hback-porch = <70>;
++				hsync-len = <20>;
++				vback-porch = <10>;
++				vfront-porch = <10>;
++				vsync-len = <3>;
++				de-active = <1>;
++				hsync-active = <0>;
++				vsync-active = <0>;
++				pixelclk-active = <0>;
++			};
++		};
++	};
+ 	status = "okay";
+ };

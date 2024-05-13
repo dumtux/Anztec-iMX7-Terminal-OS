@@ -1,0 +1,174 @@
+From 844b3f6e98315f057f2ddafb096e66ac338fdef2 Mon Sep 17 00:00:00 2001
+From: dineshneevee <dinesh@neeveetech.com>
+Date: Mon, 13 May 2024 13:29:30 +0530
+Subject: [PATCH] lcd-enable
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi |  5 ++
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 94 ++++++++++-----------
+ 2 files changed, 52 insertions(+), 47 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index f5cffa898811..44a2762729f5 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -141,3 +141,8 @@ &usdhc1 {
+ &usdhc2 {
+ 	status = "okay";
+ };
++
++/* Anztec Colibri LCD Display */
++&lcdif{
++       status = "okay";
++};
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 921a431387e2..3cdfa9653434 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -771,8 +771,8 @@ pinctrl_atmel_adapter: atmelconnectorgrp {
+ 	/* Atmel MXT touchsceen + boards with built-in Capacitive Touch Connector */
+ 	pinctrl_atmel_connector: atmeladaptergrp {
+ 		fsl,pins = <
+-			MX7D_PAD_EPDC_BDR0__GPIO2_IO28		0x14 /* SODIMM 106 / RST */
+-			MX7D_PAD_EPDC_DATA15__GPIO2_IO15	0x74 /* SODIMM 107 / INT */
++		/*	MX7D_PAD_EPDC_BDR0__GPIO2_IO28		0x14 *//* SODIMM 106 / RST */
++		/*	MX7D_PAD_EPDC_DATA15__GPIO2_IO15	0x74 *//* SODIMM 107 / INT */
+ 		>;
+ 	};
+ 
+@@ -857,13 +857,13 @@ pinctrl_flexcan2: flexcan2grp {
+ 
+ 	pinctrl_gpio1: gpio1grp {
+ 		fsl,pins = <
+-			MX7D_PAD_EPDC_BDR1__GPIO2_IO29		0x14 /* SODIMM 110 */
+-			MX7D_PAD_EPDC_DATA00__GPIO2_IO0		0x14 /* SODIMM 111 */
+-			MX7D_PAD_EPDC_DATA01__GPIO2_IO1		0x14 /* SODIMM 113 */
+-			MX7D_PAD_EPDC_DATA02__GPIO2_IO2		0x14 /* SODIMM 115 */
+-			MX7D_PAD_EPDC_DATA03__GPIO2_IO3		0x14 /* SODIMM 117 */
+-			MX7D_PAD_EPDC_DATA04__GPIO2_IO4		0x14 /* SODIMM 119 */
+-			MX7D_PAD_EPDC_DATA05__GPIO2_IO5		0x14 /* SODIMM 121 */
++		/*	MX7D_PAD_EPDC_BDR1__GPIO2_IO29		0x14 *//* SODIMM 110 */
++		/*	MX7D_PAD_EPDC_DATA00__GPIO2_IO0		0x14 *//* SODIMM 111 */
++		/*	MX7D_PAD_EPDC_DATA01__GPIO2_IO1		0x14 *//* SODIMM 113 */
++		/*	MX7D_PAD_EPDC_DATA02__GPIO2_IO2		0x14 *//* SODIMM 115 */
++		/*	MX7D_PAD_EPDC_DATA03__GPIO2_IO3		0x14 *//* SODIMM 117 */
++		/*	MX7D_PAD_EPDC_DATA04__GPIO2_IO4		0x14 *//* SODIMM 119 */
++		/*	MX7D_PAD_EPDC_DATA05__GPIO2_IO5		0x14 *//* SODIMM 121 */
+ 			MX7D_PAD_EPDC_DATA06__GPIO2_IO6		0x14 /* SODIMM 123 */
+ 			MX7D_PAD_EPDC_DATA07__GPIO2_IO7		0x14 /* SODIMM 125 */
+ 			MX7D_PAD_EPDC_DATA08__GPIO2_IO8		0x74 /* SODIMM 91 */
+@@ -871,13 +871,13 @@ MX7D_PAD_EPDC_DATA09__GPIO2_IO9		0x14 /* SODIMM 89 */
+ 			MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x74 /* SODIMM 105 */
+ 			MX7D_PAD_EPDC_DATA11__GPIO2_IO11	0x14 /* SODIMM 152 */
+ 		/*	MX7D_PAD_EPDC_DATA12__GPIO2_IO12	0x14 *//* Anztec SODIMM 150 */
+-			MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x14 /* SODIMM 126 */
++		/*	MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x14 *//* SODIMM 126 */
+ 			MX7D_PAD_EPDC_GDCLK__GPIO2_IO24		0x14 /* SODIMM 132 */
+ 			MX7D_PAD_EPDC_GDOE__GPIO2_IO25		0x14 /* SODIMM 134 */
+ 		/*	MX7D_PAD_EPDC_GDRL__GPIO2_IO26		0x14 *//* SODIMM 133 */
+ 			MX7D_PAD_EPDC_GDSP__GPIO2_IO27		0x14 /* SODIMM 104 */
+-			MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x14 /* SODIMM 112 */
+-			MX7D_PAD_EPDC_PWR_STAT__GPIO2_IO31	0x14 /* SODIMM 128 */
++		/*	MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x14 *//* SODIMM 112 */
++		/*	MX7D_PAD_EPDC_PWR_STAT__GPIO2_IO31	0x14 *//* SODIMM 128 */
+ 		/*	MX7D_PAD_EPDC_SDCE0__GPIO2_IO20		0x14 *//* SODIMM 122 */
+ 		/*	MX7D_PAD_EPDC_SDCE1__GPIO2_IO21		0x14 *//* SODIMM 124 */
+ 		/*	MX7D_PAD_EPDC_SDCE2__GPIO2_IO22		0x14 *//* SODIMM 127 */
+@@ -917,12 +917,12 @@ MX7D_PAD_SD2_RESET_B__GPIO5_IO11	0x14 /* SODIMM 98 */
+ 
+ 	pinctrl_gpio3: gpio3grp { /* LCD 18-23 */
+ 		fsl,pins = <
+-			MX7D_PAD_LCD_DATA18__GPIO3_IO23		0x14 /* SODIMM 136 */
+-			MX7D_PAD_LCD_DATA19__GPIO3_IO24		0x14 /* SODIMM 138 */
+-			MX7D_PAD_LCD_DATA20__GPIO3_IO25		0x14 /* SODIMM 140 */
+-			MX7D_PAD_LCD_DATA21__GPIO3_IO26		0x14 /* SODIMM 142 */
++		/*	MX7D_PAD_LCD_DATA18__GPIO3_IO23		0x14 *//* SODIMM 136 */
++		/*	MX7D_PAD_LCD_DATA19__GPIO3_IO24		0x14 *//* SODIMM 138 */
++		/*	MX7D_PAD_LCD_DATA20__GPIO3_IO25		0x14 *//* SODIMM 140 */
++		/*	MX7D_PAD_LCD_DATA21__GPIO3_IO26		0x14 *//* SODIMM 142 */
+ 			MX7D_PAD_LCD_DATA22__GPIO3_IO27		0x74 /* SODIMM 144 */
+-			MX7D_PAD_LCD_DATA23__GPIO3_IO28		0x74 /* SODIMM 146 */
++		/*	MX7D_PAD_LCD_DATA23__GPIO3_IO28		0x74 *//* SODIMM 146 */
+ 		>;
+ 	};
+ 
+@@ -1007,46 +1007,46 @@ MX7D_PAD_ENET1_RGMII_TD3__GPIO7_IO9	0x4000007f
+ 
+ 	pinctrl_lcdif_dat: lcdifdatgrp {
+ 		fsl,pins = <
+-			MX7D_PAD_LCD_DATA00__LCD_DATA0		0x79 /* SODIMM 76 */
+-			MX7D_PAD_LCD_DATA01__LCD_DATA1		0x79 /* SODIMM 70 */
+-			MX7D_PAD_LCD_DATA02__LCD_DATA2		0x79 /* SODIMM 60 */
+-			MX7D_PAD_LCD_DATA03__LCD_DATA3		0x79 /* SODIMM 58 */
+-			MX7D_PAD_LCD_DATA04__LCD_DATA4		0x79 /* SODIMM 78 */
+-			MX7D_PAD_LCD_DATA05__LCD_DATA5		0x79 /* SODIMM 72 */
+-			MX7D_PAD_LCD_DATA06__LCD_DATA6		0x79 /* SODIMM 80 */
+-			MX7D_PAD_LCD_DATA07__LCD_DATA7		0x79 /* SODIMM 46 */
+-			MX7D_PAD_LCD_DATA08__LCD_DATA8		0x79 /* SODIMM 62 */
+-			MX7D_PAD_LCD_DATA09__LCD_DATA9		0x79 /* SODIMM 48 */
+-			MX7D_PAD_LCD_DATA10__LCD_DATA10		0x79 /* SODIMM 74 */
+-			MX7D_PAD_LCD_DATA11__LCD_DATA11		0x79 /* SODIMM 50 */
+-			MX7D_PAD_LCD_DATA12__LCD_DATA12		0x79 /* SODIMM 52 */
+-			MX7D_PAD_LCD_DATA13__LCD_DATA13		0x79 /* SODIMM 54 */
+-			MX7D_PAD_LCD_DATA14__LCD_DATA14		0x79 /* SODIMM 66 */
+-			MX7D_PAD_LCD_DATA15__LCD_DATA15		0x79 /* SODIMM 64 */
+-			MX7D_PAD_LCD_DATA16__LCD_DATA16		0x79 /* SODIMM 57 */
+-			MX7D_PAD_LCD_DATA17__LCD_DATA17		0x79 /* SODIMM 61 */
++			MX7D_PAD_EPDC_DATA00__LCD_DATA0         0x79 /* SODIMM 111 */
++			MX7D_PAD_EPDC_DATA01__LCD_DATA1         0x79 /* SODIMM 113 */
++			MX7D_PAD_LCD_DATA02__LCD_DATA2          0x79 /* SODIMM 60 */
++			MX7D_PAD_EPDC_DATA03__LCD_DATA3         0x79 /* SODIMM 117 */
++			MX7D_PAD_EPDC_DATA04__LCD_DATA4         0x79 /* SODIMM 119 */
++			MX7D_PAD_EPDC_DATA05__LCD_DATA5         0x79 /* SODIMM 121 */
++			MX7D_PAD_EPDC_BDR1__LCD_DATA6           0x79 /* SODIMM 110 */
++			MX7D_PAD_EPDC_BDR0__LCD_DATA7           0x79 /* SODIMM 106 */
++			MX7D_PAD_LCD_DATA08__LCD_DATA8          0x79 /* SODIMM 62 */
++			MX7D_PAD_LCD_DATA09__LCD_DATA9          0x79 /* SODIMM 48 */
++			MX7D_PAD_LCD_DATA10__LCD_DATA10         0x79 /* SODIMM 74 */
++			MX7D_PAD_LCD_DATA11__LCD_DATA11         0x79 /* SODIMM 50 */
++			MX7D_PAD_EPDC_PWR_STAT__LCD_DATA12      0x79 /* SODIMM 128 */
++			MX7D_PAD_LCD_DATA13__LCD_DATA13         0x79 /* SODIMM 54 */
++			MX7D_PAD_LCD_DATA14__LCD_DATA14         0x79 /* SODIMM 66 */
++			MX7D_PAD_EPDC_DATA15__LCD_DATA15        0x79 /* SODIMM 107 */
++			MX7D_PAD_LCD_DATA16__LCD_DATA16         0x79 /* SODIMM 57 */
++			MX7D_PAD_LCD_DATA17__LCD_DATA17         0x79 /* SODIMM 61 */
+ 		>;
+ 	};
+ 
+ 	pinctrl_lcdif_dat_24: lcdifdat24grp {
+ 		fsl,pins = <
+-			MX7D_PAD_LCD_DATA18__LCD_DATA18		0x79 /* SODIMM 136 */
+-			MX7D_PAD_LCD_DATA19__LCD_DATA19		0x79 /* SODIMM 138 */
+-			MX7D_PAD_LCD_DATA20__LCD_DATA20		0x79 /* SODIMM 140 */
+-			MX7D_PAD_LCD_DATA21__LCD_DATA21		0x79 /* SODIMM 142 */
+-			MX7D_PAD_LCD_DATA22__LCD_DATA22		0x79 /* SODIMM 144 */
+-			MX7D_PAD_LCD_DATA23__LCD_DATA23		0x79 /* SODIMM 146 */
++			MX7D_PAD_LCD_DATA18__LCD_DATA18         0x79 /* SODIMM 136 */
++			MX7D_PAD_LCD_DATA19__LCD_DATA19         0x79 /* SODIMM 138 */
++			MX7D_PAD_LCD_DATA20__LCD_DATA20         0x79 /* SODIMM 140 */
++			MX7D_PAD_LCD_DATA21__LCD_DATA21         0x79 /* SODIMM 142 */
++			MX7D_PAD_EPDC_DATA14__LCD_DATA14        0x79 /* SODIMM 126 */
++			MX7D_PAD_LCD_DATA23__LCD_DATA23         0x79 /* SODIMM 146 */
+ 		>;
+ 	};
+ 
+ 	pinctrl_lcdif_ctrl: lcdifctrlgrp {
+ 		fsl,pins = <
+-			MX7D_PAD_LCD_CLK__LCD_CLK		0x79 /* SODIMM 56 */
+-			MX7D_PAD_LCD_ENABLE__LCD_ENABLE		0x79 /* SODIMM 44 */
+-			MX7D_PAD_LCD_HSYNC__LCD_HSYNC		0x79 /* SODIMM 68 */
+-			MX7D_PAD_LCD_VSYNC__LCD_VSYNC		0x79 /* SODIMM 82 */
+-		>;
+-	};
++			MX7D_PAD_EPDC_PWR_COM__LCD_HSYNC        0x79 /* SODIMM 112 */
++			MX7D_PAD_EPDC_DATA02__LCD_VSYNC         0x79 /* SODIMM 115 */
++			MX7D_PAD_LCD_ENABLE__LCD_ENABLE         0x79 /* SODIMM 44 */
++			MX7D_PAD_LCD_CLK__LCD_CLK               0x79 /* SODIMM 56 */
++                >;
++        };
+ 
+ 	pinctrl_lvds_transceiver: lvdstx {
+ 		fsl,pins = <
+-- 
+2.25.1
+

@@ -1,0 +1,72 @@
+From 8b46ac43914b00c2ca2d1821b3a1f37f96c98f6e Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 18 Mar 2024 12:06:50 +0530
+Subject: [PATCH] uart c enable
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 4f73f18c0b88..89eeb286a90e 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -693,7 +693,7 @@ &iomuxc {
+ 	 */
+ 	pinctrl_atmel_adapter: atmelconnectorgrp {
+ 		fsl,pins = <
+-			MX7D_PAD_GPIO1_IO09__GPIO1_IO9		0x74 /* SODIMM 28 / INT */
++		/*	MX7D_PAD_GPIO1_IO09__GPIO1_IO9		0x74 *//* Anztec SODIMM 28 / INT */
+ 			MX7D_PAD_GPIO1_IO10__GPIO1_IO10		0x14 /* SODIMM 30 / RST */
+ 		>;
+ 	};
+@@ -824,7 +824,7 @@ MX7D_PAD_SAI1_RX_SYNC__GPIO6_IO16	0x14 /* SODIMM 77 */
+ 		/*	MX7D_PAD_SD2_CMD__GPIO5_IO13		0x14 *//* Anztec SODIMM 186 */
+ 		/*	MX7D_PAD_SD2_DATA2__GPIO5_IO16		0x14 *//* Anztec SODIMM 100 */
+ 		/*	MX7D_PAD_SD2_DATA3__GPIO5_IO17		0x14 *//* Anztec SODIMM 102 */
+-			MX7D_PAD_UART3_RTS_B__GPIO4_IO6		0x14 /* SODIMM 131 */
++		/*	MX7D_PAD_UART3_RTS_B__GPIO4_IO6		0x14 *//* Anztec SODIMM 131 */
+ 		>;
+ 	};
+ 
+@@ -970,13 +970,13 @@ MX7D_PAD_ENET1_RGMII_TXC__GPIO7_IO11    0x14 /* SODIMM 99 */
+ 	pinctrl_pwm1: pwm1grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21	0x4  /* SODIMM 59 */
+-			MX7D_PAD_GPIO1_IO08__PWM1_OUT		0x79 /* SODIMM 59 */
++		/*	MX7D_PAD_GPIO1_IO08__PWM1_OUT		0x79 *//* Anztec SODIMM 59 */
+ 		>;
+ 	};
+ 
+ 	pinctrl_pwm2: pwm2grp {
+ 		fsl,pins = <
+-			MX7D_PAD_GPIO1_IO09__PWM2_OUT		0x79 /* SODIMM 28 */
++		/*	MX7D_PAD_GPIO1_IO09__PWM2_OUT		0x79 *//* Anztec SODIMM 28 */
+ 		>;
+ 	};
+ 
+@@ -989,7 +989,7 @@ MX7D_PAD_GPIO1_IO10__PWM3_OUT		0x79 /* SODIMM 30 */
+ 	pinctrl_pwm4: pwm4grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ECSPI2_SCLK__GPIO4_IO20	0x4  /* SODIMM 67 */
+-			MX7D_PAD_GPIO1_IO11__PWM4_OUT		0x79 /* SODIMM 67 */
++		/*	MX7D_PAD_GPIO1_IO11__PWM4_OUT		0x79 *//* Anztec SODIMM 67 */
+ 		>;
+ 	};
+ 
+@@ -1027,8 +1027,10 @@ MX7D_PAD_UART2_TX_DATA__UART2_DTE_RX	0x79 /* SODIMM 36 */
+ 	};
+ 	pinctrl_uart3: uart3grp {
+ 		fsl,pins = <
+-			MX7D_PAD_UART3_RX_DATA__UART3_DTE_TX	0x79 /* SODIMM 21 */
+-			MX7D_PAD_UART3_TX_DATA__UART3_DTE_RX	0x79 /* SODIMM 19 */
++			MX7D_PAD_GPIO1_IO08__UART3_DTE_TX	0x79 /* SODIMM 59 */
++			MX7D_PAD_GPIO1_IO09__UART3_DTE_RX	0x79 /* SODIMM 28 */
++			MX7D_PAD_UART3_RTS_B__UART3_DTE_CTS	0x79 /* SODIMM 131 */
++			MX7D_PAD_GPIO1_IO11__UART3_DTE_RTS	0x79 /* SODIMM 67 */
+ 		>;
+ 	};
+ 
+-- 
+2.25.1
+

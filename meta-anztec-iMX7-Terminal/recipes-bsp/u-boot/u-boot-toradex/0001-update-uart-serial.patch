@@ -1,0 +1,46 @@
+From ade976352f947b1da1e7edc84e6e70f88c02264a Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Tue, 5 Mar 2024 12:55:06 +0530
+Subject: [PATCH] update uart serial
+
+---
+ arch/arm/dts/imx7-colibri.dtsi | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/arch/arm/dts/imx7-colibri.dtsi b/arch/arm/dts/imx7-colibri.dtsi
+index b352036e30..c1b5a68c5f 100644
+--- a/arch/arm/dts/imx7-colibri.dtsi
++++ b/arch/arm/dts/imx7-colibri.dtsi
+@@ -121,6 +121,14 @@
+ 	status = "okay";
+ };
+ 
++&uart7 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart7>;
++	uart-has-rtscts;
++	fsl,dte-mode;
++	status = "okay";
++};
++
+ &usdhc1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc1 &pinctrl_cd_usdhc1>;
+@@ -153,6 +161,14 @@
+ 			MX7D_PAD_SAI2_TX_SYNC__UART1_DTE_RTS	0x79
+ 		>;
+ 	};
++	pinctrl_uart7: uart7-grp {
++		fsl,pins = <
++			MX7D_PAD_EPDC_DATA12__UART7_DTE_TX	0x79 /* UARTG Serial debug */
++			MX7D_PAD_EPDC_DATA13__UART7_DTE_RX	0x79
++			MX7D_PAD_ECSPI2_SS0__UART7_DTE_RTS	0x79
++			MX7D_PAD_ECSPI2_MISO__UART7_DTE_CTS	0x79
++		>;
++	};
+ 
+ 	pinctrl_uart1_ctrl1: uart1-ctrl1-grp {
+ 		fsl,pins = <
+-- 
+2.25.1
+

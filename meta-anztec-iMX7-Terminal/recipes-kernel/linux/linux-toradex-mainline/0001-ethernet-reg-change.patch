@@ -1,0 +1,54 @@
+From 469fac52fb4108713f06ddcd3c9aa7e7d3659cf5 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 3 Apr 2024 15:32:23 +0530
+Subject: [PATCH] ethernet reg change
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 28a465265411..ac9477464c9c 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -108,12 +108,12 @@ reg_module_3v3_eth: regulator-module-3v3-eth {
+ 	reg_module_3v3_eth2: regulator-module-3v3-eth2 {
+ 		compatible = "regulator-fixed";
+ 		off-on-delay-us = <200000>;
+-		regulator-name = "+V3.3_ETH";
++		regulator-name = "+V3.3_ETH2";
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
+ 		regulator-boot-on;
+ 		startup-delay-us = <200000>;
+-		vin-supply = <&reg_LDO1>;
++		vin-supply = <&reg_LDO6>;
+ 	};
+ 
+ 	reg_usbh_vbus: regulator-usbh-vbus {
+@@ -486,6 +486,13 @@ reg_LDO1: LDO1 {
+ 				regulator-name = "PWR_EN_+V3.3_ETH";
+ 			};
+ 
++			reg_LDO6: LDO6 {
++				regulator-boot-on;
++				regulator-max-microvolt = <3300000>;
++				regulator-min-microvolt = <3300000>;
++				regulator-name = "PWR_EN_+V3.3_ETH_2";
++			};
++
+ 			reg_LDO2: LDO2 {
+ 				regulator-always-on;
+ 				regulator-boot-on;
+@@ -812,7 +819,7 @@ MX7D_PAD_SD2_WP__GPIO5_IO10			0x0
+ 		>;
+ 	};
+ 
+-	pinctrl_enet2: enet1grp {
++	pinctrl_enet2: enet2grp {
+                 fsl,pins = <
+ 			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2	0x73
+ 			MX7D_PAD_GPIO1_IO15__ENET2_MDC       		0x3
+-- 
+2.25.1
+

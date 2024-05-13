@@ -1,0 +1,40 @@
+From 2361cea33996ea55a851783ef61be106518a0b37 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 15 Mar 2024 18:06:54 +0530
+Subject: [PATCH] temp hum sensor
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi  | 7 +++++++
+ arch/arm/configs/imx_v6_v7_defconfig | 1 +
+ 2 files changed, 8 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index df56b2f1f297..4f73f18c0b88 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -537,6 +537,13 @@ rtc: rtc@68 {
+ 		reg = <0x68>;
+ 		status = "disabled";
+ 	};
++
++	/* HDC2080DMBR Temperature Humidity sensor */
++	hdc2080: humidity@40 {
++		compatible = "ti,hdc2080";
++		reg = <0x40>;
++		status = "okay";
++	};
+ };
+ 
+ &lcdif {
+diff --git a/arch/arm/configs/imx_v6_v7_defconfig b/arch/arm/configs/imx_v6_v7_defconfig
+index 078d61b758a9..37417d2c5c1a 100644
+--- a/arch/arm/configs/imx_v6_v7_defconfig
++++ b/arch/arm/configs/imx_v6_v7_defconfig
+@@ -471,3 +471,4 @@ CONFIG_DEBUG_FS=y
+ # CONFIG_SCHED_DEBUG is not set
+ CONFIG_PROVE_LOCKING=y
+ # CONFIG_FTRACE is not set
++CONFIG_HDC2010=y
+-- 
+2.25.1
+

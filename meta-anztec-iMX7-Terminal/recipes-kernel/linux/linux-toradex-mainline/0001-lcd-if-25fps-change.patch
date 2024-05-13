@@ -1,0 +1,36 @@
+From 94279932747aa33e192b38c6aa19f7b8acb8c1b0 Mon Sep 17 00:00:00 2001
+From: dineshneevee <dinesh@neeveetech.com>
+Date: Wed, 1 May 2024 18:28:52 +0530
+Subject: [PATCH] lcd-if-25fps-change
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 4fd26a06626a..18a9867e2efb 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -165,7 +165,7 @@ display0: lcd-display {
+ 		display-timings {
+ 			native-mode = <&timing_wxga>;
+ 			timing_wxga: 1280x800 {
+-				clock-frequency = <23702400>;
++				clock-frequency = <29628000>;
+ 				hactive = <1280>;
+ 				vactive = <800>;
+ 				hfront-porch = <70>;
+@@ -175,8 +175,8 @@ timing_wxga: 1280x800 {
+ 				vfront-porch = <10>;
+ 				vsync-len = <3>;
+ 				de-active = <1>;
+-				hsync-active = <1>;
+-				vsync-active = <1>;
++				hsync-active = <0>;
++				vsync-active = <0>;
+ 				pixelclk-active = <1>;
+ 			};
+ 		};
+-- 
+2.25.1
+

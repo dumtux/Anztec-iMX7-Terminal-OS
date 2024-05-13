@@ -1,0 +1,57 @@
+From a740a1620528ecfe3c619482b64e5d987fdf2a3e Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 22 Mar 2024 12:30:49 +0530
+Subject: [PATCH] sensor debug print
+
+---
+ drivers/iio/humidity/hdc2010.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/iio/humidity/hdc2010.c b/drivers/iio/humidity/hdc2010.c
+index d6858ccb056e..98f725bd0a07 100644
+--- a/drivers/iio/humidity/hdc2010.c
++++ b/drivers/iio/humidity/hdc2010.c
+@@ -258,7 +258,7 @@ static int hdc2010_probe(struct i2c_client *client,
+ 	struct hdc2010_data *data;
+ 	u8 tmp;
+ 	int ret;
+-
++	printk(KERN_INFO "-----hdc2010_int_probe_function_print1--------\n");
+ 	if (!i2c_check_functionality(client->adapter,
+ 	    I2C_FUNC_SMBUS_WORD_DATA | I2C_FUNC_SMBUS_BYTE | I2C_FUNC_I2C))
+ 		return -EOPNOTSUPP;
+@@ -267,6 +267,7 @@ static int hdc2010_probe(struct i2c_client *client,
+ 	if (!indio_dev)
+ 		return -ENOMEM;
+ 
++	printk(KERN_INFO "-----hdc2010_int_probe_function_print2--------\n");
+ 	data = iio_priv(indio_dev);
+ 	i2c_set_clientdata(client, indio_dev);
+ 	data->client = client;
+@@ -283,6 +284,7 @@ static int hdc2010_probe(struct i2c_client *client,
+ 	indio_dev->channels = hdc2010_channels;
+ 	indio_dev->num_channels = ARRAY_SIZE(hdc2010_channels);
+ 
++	printk(KERN_INFO "-----hdc2010_int_probe_function_print3--------\n");
+ 	/* Enable Automatic Measurement Mode at 5Hz */
+ 	ret = hdc2010_update_drdy_config(data, HDC2010_AMM, HDC2010_AMM);
+ 	if (ret)
+@@ -292,6 +294,7 @@ static int hdc2010_probe(struct i2c_client *client,
+ 	 * We enable both temp and humidity measurement.
+ 	 * However the measurement won't start even in AMM until triggered.
+ 	 */
++	printk(KERN_INFO "-----hdc2010_int_probe_function_print4--------\n");
+ 	tmp = (data->measurement_config & ~HDC2010_MEAS_CONF) |
+ 		HDC2010_MEAS_TRIG;
+ 
+@@ -303,6 +306,7 @@ static int hdc2010_probe(struct i2c_client *client,
+ 		return ret;
+ 	}
+ 
++	printk(KERN_INFO "-----hdc2010_int_probe_function_print5--------\n");
+ 	data->measurement_config = tmp;
+ 
+ 	return iio_device_register(indio_dev);
+-- 
+2.25.1
+
