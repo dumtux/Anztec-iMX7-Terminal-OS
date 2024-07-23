@@ -1,0 +1,28 @@
+From 0b81a996e97acd502d5899d0f3a39f34a50630dd Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 29 May 2024 11:54:46 +0530
+Subject: [PATCH] spi fram freq change
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 00841ec5dac5..913ad8a4a590 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -49,10 +49,9 @@ &ecspi3 {
+ 	fram: fm25v02@0 {
+ 		compatible = "jedec,spi-nor";
+ 		reg = <0>;
+-		spi-max-frequency = <2000000>;
++		spi-max-frequency = <1000000>;
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+-		m25p,fast-read;
+ 		status = "okay";
+ 
+ 		partition@p1 {
+-- 
+2.25.1
+

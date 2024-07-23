@@ -1,0 +1,25 @@
+From b1fc33347135ba219a7e10fd68bd8f64d5f8b273 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 12 Jun 2024 17:59:59 +0530
+Subject: [PATCH] fec clk change
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index dbf2691c85ff..ea8e43f606fe 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -1360,7 +1360,7 @@ &iomuxc_lpsr {
+ 
+ 	pinctrl_enet2_lpsr: enet2_lpsr {
+ 		fsl,pins = <
+-			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2     0x73 /* SODIMM 22 */
++			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2     0x1 /* SODIMM 22 */
+ 		>;
+ 	};
+ 
+-- 
+2.25.1
+

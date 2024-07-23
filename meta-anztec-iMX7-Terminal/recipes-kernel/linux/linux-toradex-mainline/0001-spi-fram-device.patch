@@ -1,0 +1,26 @@
+From dafe89e866983d5950ec844f410829d1d689a1ed Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 10 Jun 2024 13:48:38 +0530
+Subject: [PATCH] spi fram device
+
+---
+ drivers/mtd/spi-nor/core.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/mtd/spi-nor/core.c b/drivers/mtd/spi-nor/core.c
+index a9000b0ebe69..8c9f235b7c87 100644
+--- a/drivers/mtd/spi-nor/core.c
++++ b/drivers/mtd/spi-nor/core.c
+@@ -3255,6 +3255,9 @@ static const struct spi_device_id spi_nor_dev_ids[] = {
+ 	{ "mr25h10" },  /*   1 Mib, 40 MHz */
+ 	{ "mr25h40" },  /*   4 Mib, 40 MHz */
+ 
++	/*New devices added for the ANZTEC terminal*/
++	{"FM25V02-G"},  {"FM25V02-GTR"},
++
+ 	{ },
+ };
+ MODULE_DEVICE_TABLE(spi, spi_nor_dev_ids);
+-- 
+2.25.1
+

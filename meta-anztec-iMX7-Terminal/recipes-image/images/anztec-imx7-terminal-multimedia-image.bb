@@ -6,7 +6,7 @@ DESCRIPTION = "Image for BSP verification with QT and multimedia features"
 inherit populate_sdk_qt5
 
 #Prefix to the resulting deployable tarball name
-export IMAGE_BASENAME = "Anztec-iMX7-Terminal-Multimedia-Image_30"
+export IMAGE_BASENAME = "Anztec-iMX7-Terminal-Multimedia-Image_41"
 
 IMAGE_FEATURES += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston', \

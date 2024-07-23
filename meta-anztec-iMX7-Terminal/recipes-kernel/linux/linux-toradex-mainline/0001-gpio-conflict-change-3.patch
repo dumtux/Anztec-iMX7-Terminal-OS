@@ -1,0 +1,33 @@
+From c486e802e7af9901eff5d84b6aa097c46802712d Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 6 Jun 2024 20:48:33 +0530
+Subject: [PATCH] 0001-gpio-conflict-change-3
+
+---
+ arch/arm/boot/dts/imx7-colibri-iris.dtsi | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-iris.dtsi b/arch/arm/boot/dts/imx7-colibri-iris.dtsi
+index 6a9e5ab59691..67dee22dadfb 100644
+--- a/arch/arm/boot/dts/imx7-colibri-iris.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-iris.dtsi
+@@ -12,12 +12,12 @@ &adc1 {
+  * The Atmel maxtouch controller uses SODIMM 28/30, also used for PWM<B>, PWM<C>, aka pwm2, pwm3.
+  * So if you enable following capacitive touch controller, disable pwm2/pwm3 first.
+  */
+-&atmel_mxt_ts {
++/*&atmel_mxt_ts {
+ 	interrupt-parent = <&gpio1>;
+-	interrupts = <9 IRQ_TYPE_EDGE_FALLING>;		/* SODIMM 28 / INT */
++	interrupts = <9 IRQ_TYPE_EDGE_FALLING>;
+ 	pinctrl-0 = <&pinctrl_atmel_adapter>;
+-	reset-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;	/* SODIMM 30 / RST */
+-};
++	reset-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
++};*/
+ 
+ /* Colibri SSP */
+ &ecspi3 {
+-- 
+2.25.1
+

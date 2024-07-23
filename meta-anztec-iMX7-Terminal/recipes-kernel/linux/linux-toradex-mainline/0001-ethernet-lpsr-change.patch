@@ -1,0 +1,46 @@
+From f5219ccb57cfee3eb06a3f3dc88a21c3d796d79d Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 7 Jun 2024 17:24:31 +0530
+Subject: [PATCH] ethernet lpsr change
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 623e957c192c..7a4dd5afe25c 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -217,7 +217,7 @@ &fec2 {
+                 phy-handle = <&ethphy1>;
+                 phy-mode = "rmii";
+                 pinctrl-names = "default";
+-                pinctrl-0 = <&pinctrl_enet2>;
++                pinctrl-0 = <&pinctrl_enet2 &pinctrl_enet2_lpsr>;
+                 fsl,mii-exclusive;
+ 
+                 mdio {
+@@ -886,7 +886,6 @@ MX7D_PAD_SD2_WP__GPIO5_IO10			0x0
+ 
+ 	pinctrl_enet2: enet2grp {
+                 fsl,pins = <
+-                        MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2     0x73 /* SODIMM 22 */
+                         MX7D_PAD_GPIO1_IO15__ENET2_MDC                  0x3  /* SODIMM 178 */
+                         MX7D_PAD_GPIO1_IO14__ENET2_MDIO                 0x3  /* SODIMM 188 */
+                         MX7D_PAD_EPDC_SDCLK__ENET2_RGMII_RD0            0x73 /* SODIMM 114 */
+@@ -1346,6 +1345,12 @@ &iomuxc_lpsr {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_gpio_lpsr>;
+ 
++	pinctrl_enet2_lpsr: enet2_lpsr {
++		fsl,pins = <
++			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2     0x73 /* SODIMM 22 */
++		>;
++	};
++
+ 	pinctrl_cd_usdhc1: cdusdhc1grp {
+ 		fsl,pins = <
+ 			MX7D_PAD_LPSR_GPIO1_IO00__GPIO1_IO0	0x59 /* SODIMM 43 / MMC_CD */
+-- 
+2.25.1
+

@@ -1,0 +1,25 @@
+From 3bfc54c90dd8b69143657816e80ba24c8d31f376 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 12 Jun 2024 16:40:10 +0530
+Subject: [PATCH] fec driver change
+
+---
+ arch/arm/mach-imx/mach-imx7d.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-imx/mach-imx7d.c b/arch/arm/mach-imx/mach-imx7d.c
+index 6fdd06bcf988..f5198f57fb43 100644
+--- a/arch/arm/mach-imx/mach-imx7d.c
++++ b/arch/arm/mach-imx/mach-imx7d.c
+@@ -41,7 +41,7 @@ static void __init imx7d_enet_clk_sel(void)
+ 
+ 	gpr = syscon_regmap_lookup_by_compatible("fsl,imx7d-iomuxc-gpr");
+ 	if (!IS_ERR(gpr)) {
+-		regmap_update_bits(gpr, IOMUXC_GPR1, IMX7D_GPR1_ENET_TX_CLK_SEL_MASK, 0);
++		regmap_update_bits(gpr, IOMUXC_GPR1, IMX7D_GPR1_ENET_TX_CLK_SEL_MASK, IMX7D_GPR1_ENET1_TX_CLK_SEL_MASK);
+ 		regmap_update_bits(gpr, IOMUXC_GPR1, IMX7D_GPR1_ENET_CLK_DIR_MASK, 0);
+ 	} else {
+ 		pr_err("failed to find fsl,imx7d-iomux-gpr regmap\n");
+-- 
+2.25.1
+

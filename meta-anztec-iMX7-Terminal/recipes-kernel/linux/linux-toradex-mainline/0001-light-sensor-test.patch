@@ -1,0 +1,41 @@
+From a35ac3f0b5e6fa6db6d3577dd0c2f193bed24368 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 17 Jun 2024 16:38:26 +0530
+Subject: [PATCH] light sensor test
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 156597c666f5..abff8883e2d7 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -609,13 +609,13 @@ i2c4@0{
+ 			reg = <0>;
+ 
+ 			/* 24LC04B-I_SN EEPOROM */
+-			eeprom@50 {
++			/*eeprom@50 {
+ 				compatible = "microchip,24c32", "atmel,24c32";
+ 				reg = <0x50>;
+ 				pagesize = <16>;
+ 				size = <512>;
+ 				status = "okay";
+-			};
++			};*/
+ 
+ 			/* OPT3005DTSR AMBIENT LIGHT SENSOR */
+ 			light_sensor@44 {
+@@ -1063,7 +1063,7 @@ MX7D_PAD_EPDC_DATA06__GPIO2_IO6         0x14 /* SODIMM 123 */
+ 
+ 	intr_light_sensor_gpio2: i2c4lightgrp {
+ 		fsl,pins = <
+-			MX7D_PAD_EPDC_DATA07__GPIO2_IO7         0x74 /* SODIMM 125 */
++			MX7D_PAD_EPDC_DATA07__GPIO2_IO7         0x34 /* SODIMM 125 */
+ 		>;
+ 	};
+ 
+-- 
+2.25.1
+

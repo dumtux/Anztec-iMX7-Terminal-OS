@@ -1,0 +1,25 @@
+From ce63c6d32427dd8e9b5ef4acbf80d1534adcebe3 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Tue, 4 Jun 2024 19:44:57 +0530
+Subject: [PATCH] eeprm comp check
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 724f244cd4a1..5639edb4c2d6 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -621,7 +621,7 @@ i2c4@1{
+ 
+ 			/* 24LC04B-I_SN EEPOROM */
+ 			eeprom@50 {
+-				compatible = "microchip,24c32", "atmel,24c32";
++				compatible = "atmel,24c32";
+                                 reg = <0x50>;
+ 			};
+ 		};
+-- 
+2.25.1
+

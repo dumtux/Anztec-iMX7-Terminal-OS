@@ -1,0 +1,34 @@
+From 879d2a3cc48846dbca75c7e3c7a6ce69e8193f7c Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 5 Jun 2024 20:19:52 +0530
+Subject: [PATCH] i2c eeprom properties
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 80967806e54c..09fc0806495a 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -598,6 +598,8 @@ i2c4@0{
+ 			eeprom@50 {
+ 				compatible = "microchip,24c32", "atmel,24c32";
+ 				reg = <0x50>;
++				pagesize = <16>;
++				size = <512>;
+ 			};
+ 
+ 			/* OPT3005DTSR AMBIENT LIGHT SENSOR */
+@@ -621,6 +623,8 @@ i2c4@1{
+ 			eeprom@50 {
+ 				compatible = "atmel,24c32";
+                                 reg = <0x50>;
++				pagesize = <16>;
++				size = <512>;
+ 			};
+ 		};
+ 	};
+-- 
+2.25.1
+

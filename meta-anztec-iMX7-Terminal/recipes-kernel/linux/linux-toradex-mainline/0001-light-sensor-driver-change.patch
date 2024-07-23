@@ -1,0 +1,24 @@
+From d247bcffa862009c187557731110f510f0e00aef Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 17 Jun 2024 16:50:12 +0530
+Subject: [PATCH] light sensor driver change'
+
+---
+ drivers/iio/light/opt3001.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/iio/light/opt3001.c b/drivers/iio/light/opt3001.c
+index a26d1c3f9543..9f5efc57200a 100644
+--- a/drivers/iio/light/opt3001.c
++++ b/drivers/iio/light/opt3001.c
+@@ -753,6 +753,7 @@ static int opt3001_probe(struct i2c_client *client,
+ 	opt->client = client;
+ 	opt->dev = dev;
+ 
++	printk("The debug print 1 is called");
+ 	mutex_init(&opt->lock);
+ 	init_waitqueue_head(&opt->result_ready_queue);
+ 	i2c_set_clientdata(client, iio);
+-- 
+2.25.1
+

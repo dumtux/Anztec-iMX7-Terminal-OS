@@ -1,0 +1,68 @@
+From 16d99fd2c5a260e6406603451fa70f99232756cd Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Sat, 1 Jun 2024 13:25:41 +0530
+Subject: [PATCH] i2c mux driver debug
+
+---
+ drivers/i2c/muxes/i2c-mux-pca954x.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/i2c/muxes/i2c-mux-pca954x.c b/drivers/i2c/muxes/i2c-mux-pca954x.c
+index a5f458b635df..df5e9dc8b804 100644
+--- a/drivers/i2c/muxes/i2c-mux-pca954x.c
++++ b/drivers/i2c/muxes/i2c-mux-pca954x.c
+@@ -56,7 +56,7 @@ enum pca_type {
+ 	pca_9543,
+ 	pca_9544,
+ 	pca_9545,
+-	pca_9546,
++	tca_9546,
+ 	pca_9547,
+ 	pca_9548,
+ 	pca_9846,
+@@ -124,7 +124,7 @@ static const struct chip_desc chips[] = {
+ 		.muxtype = pca954x_isswi,
+ 		.id = { .manufacturer_id = I2C_DEVICE_ID_NONE },
+ 	},
+-	[pca_9546] = {
++	[tca_9546] = {
+ 		.nchans = 4,
+ 		.muxtype = pca954x_isswi,
+ 		.id = { .manufacturer_id = I2C_DEVICE_ID_NONE },
+@@ -182,7 +182,7 @@ static const struct i2c_device_id pca954x_id[] = {
+ 	{ "pca9543", pca_9543 },
+ 	{ "pca9544", pca_9544 },
+ 	{ "pca9545", pca_9545 },
+-	{ "pca9546", pca_9546 },
++	{ "tca9546", tca_9546 },
+ 	{ "pca9547", pca_9547 },
+ 	{ "pca9548", pca_9548 },
+ 	{ "pca9846", pca_9846 },
+@@ -199,7 +199,7 @@ static const struct of_device_id pca954x_of_match[] = {
+ 	{ .compatible = "nxp,pca9543", .data = &chips[pca_9543] },
+ 	{ .compatible = "nxp,pca9544", .data = &chips[pca_9544] },
+ 	{ .compatible = "nxp,pca9545", .data = &chips[pca_9545] },
+-	{ .compatible = "nxp,pca9546", .data = &chips[pca_9546] },
++	{ .compatible = "nxp,pca9546", .data = &chips[tca_9546] },
+ 	{ .compatible = "nxp,pca9547", .data = &chips[pca_9547] },
+ 	{ .compatible = "nxp,pca9548", .data = &chips[pca_9548] },
+ 	{ .compatible = "nxp,pca9846", .data = &chips[pca_9846] },
+@@ -436,6 +436,7 @@ static int pca954x_probe(struct i2c_client *client,
+ 
+ 	/* Reset the mux if a reset GPIO is specified. */
+ 	gpio = devm_gpiod_get_optional(dev, "reset", GPIOD_OUT_HIGH);
++	printk(KERN_INFO "the debug print 1 of tca is called with %d", gpio);
+ 	if (IS_ERR(gpio))
+ 		return PTR_ERR(gpio);
+ 	if (gpio) {
+@@ -446,6 +447,7 @@ static int pca954x_probe(struct i2c_client *client,
+ 	}
+ 
+ 	data->chip = device_get_match_data(dev);
++	printk(KERN_INFO "the debug print 2 of tca is called Chip ID: %d\n", data->chip);
+ 	if (!data->chip)
+ 		data->chip = &chips[id->driver_data];
+ 
+-- 
+2.25.1
+

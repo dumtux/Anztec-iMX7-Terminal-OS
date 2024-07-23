@@ -1,0 +1,25 @@
+From a8b5c92e45c7037b7cecb34191b348e9f945a715 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 17 Jun 2024 14:24:21 +0530
+Subject: [PATCH] i2c light sensor changes
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index ea8e43f606fe..156597c666f5 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -624,7 +624,7 @@ light_sensor@44 {
+ 				pinctrl-name = "default";
+ 				pinctrl-0 = <&intr_light_sensor_gpio2>;
+ 				interrupt-parent = <&gpio2>;
+-				interrupts = <7 GPIO_ACTIVE_HIGH>;
++				interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
+ 				status = "okay";
+ 			};
+ 
+-- 
+2.25.1
+

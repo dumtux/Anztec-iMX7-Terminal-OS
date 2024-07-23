@@ -1,0 +1,25 @@
+From d380876c4bbc7e18b25c68eb7dd10d73ce6e3af7 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 29 May 2024 13:57:39 +0530
+Subject: [PATCH] i2c cam gpio change
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 765fde016595..3c7cd9a30568 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -1045,7 +1045,7 @@ MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x74 /* SODIMM 55 */
+ 
+ 	intr_4_channel_gpio2: i2c4resetgrp {
+ 		fsl,pins = <
+-			MX7D_PAD_EPDC_DATA06__GPIO2_IO6         0x74 /* SODIMM 123 */
++			MX7D_PAD_EPDC_DATA06__GPIO2_IO6         0x14 /* SODIMM 123 */
+ 		>;
+ 	};
+ 
+-- 
+2.25.1
+

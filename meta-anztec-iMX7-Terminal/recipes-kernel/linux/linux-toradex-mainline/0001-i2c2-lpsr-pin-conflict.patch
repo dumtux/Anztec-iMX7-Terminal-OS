@@ -1,0 +1,53 @@
+From eaf900c5e50c0aedcfd77ab86525e4129234e74d Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 7 Jun 2024 12:21:43 +0530
+Subject: [PATCH] i2c2 lpsr pin conflict
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index c50426e3e57a..08f289569e2e 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -634,7 +634,7 @@ eeprom@50 {
+ 	};
+ };
+ 
+-/* Colibri I2C: I2C2_SDA/SCL on SODIMM 94/81 */
++/* Colibri I2C: I2C2_SDA/SCL on SODIMM 37/29 */
+ &i2c2 {
+         clock-frequency = <100000>;
+         pinctrl-names = "default";
+@@ -1062,13 +1062,6 @@ MX7D_PAD_I2C3_SDA__I2C3_SDA		0x4000007f /* SODIMM 94 */
+                 >;
+         };
+ 
+-	pinctrl_i2c2: i2c2grp {
+-                fsl,pins = <
+-                        MX7D_PAD_LPSR_GPIO1_IO06__I2C2_SCL	0x4000007f /* SODIMM 37 */
+-                        MX7D_PAD_LPSR_GPIO1_IO07__I2C2_SDA	0x4000007f /* SODIMM 29 */
+-                >;
+-        };
+-
+ 	pinctrl_i2c4_recovery: i2c4-recoverygrp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_TD2__GPIO7_IO8	0x4000007f
+@@ -1385,6 +1378,13 @@ MX7D_PAD_LPSR_GPIO1_IO05__I2C1_SDA	0x4000007f
+ 		>;
+ 	};
+ 
++        pinctrl_i2c2: i2c2grp {
++                fsl,pins = <
++                        MX7D_PAD_LPSR_GPIO1_IO06__I2C2_SCL      0x4000007f /* SODIMM 37 */
++                        MX7D_PAD_LPSR_GPIO1_IO07__I2C2_SDA      0x4000007f /* SODIMM 29 */
++                >;
++        };
++
+ 	pinctrl_i2c1_recovery: i2c1-recoverygrp {
+ 		fsl,pins = <
+ 			MX7D_PAD_LPSR_GPIO1_IO04__GPIO1_IO4	0x4000007f
+-- 
+2.25.1
+

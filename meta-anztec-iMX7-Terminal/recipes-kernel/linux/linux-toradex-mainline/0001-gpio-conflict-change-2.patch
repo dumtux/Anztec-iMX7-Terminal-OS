@@ -1,0 +1,60 @@
+From 57e5ff65abf4be1f2ef9aa13a1ee2abc720ad3ef Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 6 Jun 2024 20:38:34 +0530
+Subject: [PATCH] gpio-conflict-change-2
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 8 ++++----
+ arch/arm/boot/dts/imx7-colibri.dtsi         | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 913ad8a4a590..4f1e4170a1ba 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -21,13 +21,13 @@ &adc1 {
+  * The Atmel maxtouch controller uses SODIMM 28/30, also used for PWM<B>, PWM<C>, aka pwm2, pwm3.
+  * So if you enable following capacitive touch controller, disable pwm2/pwm3 first.
+  */
+-&atmel_mxt_ts {
++/*&atmel_mxt_ts {
+ 	interrupt-parent = <&gpio1>;
+-	interrupts = <9 IRQ_TYPE_EDGE_FALLING>;		/* SODIMM 28 / INT */
++	interrupts = <9 IRQ_TYPE_EDGE_FALLING>;
+ 	pinctrl-0 = <&pinctrl_atmel_adapter>;
+-	reset-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;	/* SODIMM 30 / RST */
++	reset-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
+ 	status = "disabled";
+-};
++};*/
+ 
+ /* Colibri SSP */
+ &ecspi3 {
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 7458cc51d320..c50426e3e57a 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -555,16 +555,16 @@ &i2c4 {
+ 	status = "disabled";
+ 
+ 	/* Atmel maxtouch controller */
+-	atmel_mxt_ts: touchscreen@4a {
++	/* atmel_mxt_ts: touchscreen@4a {
+ 		compatible = "atmel,maxtouch";
+ 		interrupt-parent = <&gpio2>;
+-		interrupts = <15 IRQ_TYPE_EDGE_FALLING>;        /* SODIMM 107 / INT */
++		interrupts = <15 IRQ_TYPE_EDGE_FALLING>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_atmel_connector>;
+ 		reg = <0x4a>;
+-		reset-gpios = <&gpio2 28 GPIO_ACTIVE_LOW>;      /* SODIMM 106 / RST */
++		reset-gpios = <&gpio2 28 GPIO_ACTIVE_LOW>;
+ 		status = "disabled";
+-	};
++	};*/
+ 
+ 	/* M41T0M6 real time clock on carrier board */
+ 	rtc: rtc@68 {
+-- 
+2.25.1
+

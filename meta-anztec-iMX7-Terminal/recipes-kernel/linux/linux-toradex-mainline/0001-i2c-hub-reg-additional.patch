@@ -1,0 +1,24 @@
+From 8cab5b18722131159bf18010bf71401e06727b7a Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 6 Jun 2024 18:24:44 +0530
+Subject: [PATCH] i2c hub reg additional
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index c5464406dd8a..4a115ff88c78 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -136,6 +136,7 @@ reg_i2c_hub: regulator-i2c-hub {
+ 		regulator-boot-on;
+ 		gpio = <&gpio2 6 GPIO_ACTIVE_HIGH>;
+ 		enable-active-high;
++		regulator-always-on;
+ 	};
+ 
+ 	sound {
+-- 
+2.25.1
+

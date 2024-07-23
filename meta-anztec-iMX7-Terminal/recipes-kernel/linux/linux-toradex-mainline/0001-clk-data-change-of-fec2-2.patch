@@ -1,0 +1,70 @@
+From 527e578f9df4d95bb5ddb10c7d7b795869db3e36 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 11 Jul 2024 14:44:36 +0530
+Subject: [PATCH] clk-data-change-of-fec2-2
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 20 ++++++++++----------
+ arch/arm/boot/dts/imx7d.dtsi        |  7 ++++---
+ 2 files changed, 14 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 0657c9a9ebb3..4ed60b9b0a2e 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -899,15 +899,15 @@ MX7D_PAD_SD2_WP__GPIO5_IO10			0x0
+ 
+ 	pinctrl_enet2: enet2grp {
+                 fsl,pins = <
+-                        MX7D_PAD_GPIO1_IO15__ENET2_MDC                  0x2  /* SODIMM 178 */
+-                        MX7D_PAD_GPIO1_IO14__ENET2_MDIO                 0x2  /* SODIMM 188 */
+-                        MX7D_PAD_EPDC_SDCLK__ENET2_RGMII_RD0            0x2 /* SODIMM 114 */
+-                        MX7D_PAD_EPDC_SDLE__ENET2_RGMII_RD1             0x2 /* SODIMM 116 */
+-                        MX7D_PAD_EPDC_SDCE0__ENET2_RGMII_RX_CTL         0x2 /* SODIMM 122 */
+-                        MX7D_PAD_EPDC_SDCE1__ENET2_RX_ER                0x3 /* SODIMM 124 */
+-                        MX7D_PAD_EPDC_SDCE2__ENET2_RGMII_TD0            0x2 /* SODIMM 127 */
+-                        MX7D_PAD_EPDC_SDCE3__ENET2_RGMII_TD1            0x2 /* SODIMM 130 */
+-                        MX7D_PAD_EPDC_GDRL__ENET2_RGMII_TX_CTL          0x2 /* SOIDMM 133 */
++                        MX7D_PAD_GPIO1_IO15__ENET2_MDC                  0x72 /* SODIMM 178 */
++                        MX7D_PAD_GPIO1_IO14__ENET2_MDIO                 0x72 /* SODIMM 188 */
++                        MX7D_PAD_EPDC_SDCLK__ENET2_RGMII_RD0            0x72 /* SODIMM 114 */
++                        MX7D_PAD_EPDC_SDLE__ENET2_RGMII_RD1             0x72 /* SODIMM 116 */
++                        MX7D_PAD_EPDC_SDCE0__ENET2_RGMII_RX_CTL         0x72 /* SODIMM 122 */
++                        MX7D_PAD_EPDC_SDCE1__ENET2_RX_ER                0x73 /* SODIMM 124 */
++                        MX7D_PAD_EPDC_SDCE2__ENET2_RGMII_TD0            0x72 /* SODIMM 127 */
++                        MX7D_PAD_EPDC_SDCE3__ENET2_RGMII_TD1            0x72 /* SODIMM 130 */
++                        MX7D_PAD_EPDC_GDRL__ENET2_RGMII_TX_CTL          0x72 /* SOIDMM 133 */
+                 >;
+         };
+ 
+@@ -1360,7 +1360,7 @@ &iomuxc_lpsr {
+ 
+ 	pinctrl_enet2_lpsr: enet2_lpsr {
+ 		fsl,pins = <
+-			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2     0x2 /* SODIMM 22 */
++			MX7D_PAD_LPSR_GPIO1_IO03__CCM_ENET_REF_CLK2     0x40000072 /* SODIMM 22 */
+ 		>;
+ 	};
+ 
+diff --git a/arch/arm/boot/dts/imx7d.dtsi b/arch/arm/boot/dts/imx7d.dtsi
+index 7ceb7c09f7ad..b2de24e39f1a 100644
+--- a/arch/arm/boot/dts/imx7d.dtsi
++++ b/arch/arm/boot/dts/imx7d.dtsi
+@@ -196,10 +196,11 @@ fec2: ethernet@30bf0000 {
+ 		clocks = <&clks IMX7D_ENET2_IPG_ROOT_CLK>,
+ 			<&clks IMX7D_ENET_AXI_ROOT_CLK>,
+ 			<&clks IMX7D_ENET2_TIME_ROOT_CLK>,
+-			<&clks IMX7D_PLL_ENET_MAIN_125M_CLK>,
+-			<&clks IMX7D_ENET_PHY_REF_ROOT_CLK>;
++			<&clks IMX7D_PLL_ENET_MAIN_50M_CLK>,
++			<&clks IMX7D_ENET_PHY_REF_ROOT_CLK>,
++			<&clks IMX7D_ENET2_REF_ROOT_DIV>;
+ 		clock-names = "ipg", "ahb", "ptp",
+-			"enet_clk_ref", "enet_out";
++			"enet_clk_ref", "enet_out", "enet2_clk";
+ 		fsl,num-tx-queues = <3>;
+ 		fsl,num-rx-queues = <3>;
+ 		fsl,stop-mode = <&gpr 0x10 4>;
+-- 
+2.25.1
+

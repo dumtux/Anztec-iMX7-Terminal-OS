@@ -1,0 +1,26 @@
+From 81674b4a4ae999c017d55702e08ab687ec569006 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Tue, 28 May 2024 16:28:50 +0530
+Subject: [PATCH] reset pin changed
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 984adee65644..765fde016595 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -581,8 +581,7 @@ TCA9546APWR: 4-channel@70{
+ 		reg = <0x70>;
+ 		pinctrl-name = "default";
+ 		pinctrl-0 = <&intr_4_channel_gpio2>;
+-		interrupt-parent = <&gpio2>;
+-		interrupts = <6 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&gpio2 6 GPIO_ACTIVE_HIGH>; /* SODIMM 123 */
+ 		status = "okay";
+ 
+ 		i2c4@0{
+-- 
+2.25.1
+

@@ -1,0 +1,31 @@
+From 0f33304e3f2f4e2d612ae18e7a93541a23a28597 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Sat, 25 May 2024 13:25:21 +0530
+Subject: [PATCH] nxp i2c hub
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 4d1d78161b06..62e94409dbf5 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -630,6 +630,14 @@ &i2c2 {
+         scl-gpios = <&gpio1 6 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
+         sda-gpios = <&gpio1 7 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
+         status = "disabled";
++
++	/* PCA9545APW,112 NXP I2C hub */
++	PCA9545APW: i2c-switch@70 {
++		compatible = "nxp,pca9545";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		reg = <0x70>;
++	};
+ };
+ 
+ /* Colibri I2C: I2C3_SDA/SCL on SODIMM 94/81 */
+-- 
+2.25.1
+

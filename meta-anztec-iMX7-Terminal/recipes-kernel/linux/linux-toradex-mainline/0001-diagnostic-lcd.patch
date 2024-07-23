@@ -1,0 +1,36 @@
+From 0b102c8f2bb67deca18a9950d36849cd0ed86925 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 3 Jun 2024 20:25:45 +0530
+Subject: [PATCH] diagnostic lcd
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 724f244cd4a1..6a306225266b 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -154,6 +154,19 @@ dailink_master: simple-audio-card,codec {
+ 			sound-dai = <&codec>;
+ 		};
+ 	};
++
++	auxdisplay {
++		compatible = "hit,hd44780";
++		data-gpios = <&gpio3 3 GPIO_ACTIVE_HIGH>,
++                                <&gpio5 11 GPIO_ACTIVE_HIGH>,
++                                <&gpio4 3 GPIO_ACTIVE_HIGH>,
++                                <&gpio7 11 GPIO_ACTIVE_HIGH>;
++                enable-gpios = <&gpio3 11 GPIO_ACTIVE_HIGH>;
++                rs-gpios = <&gpio3 5 GPIO_ACTIVE_HIGH>;
++                rw-gpios = <&gpio3 9 GPIO_ACTIVE_HIGH>;
++                display-height-chars = <2>;
++                display-width-chars = <16>;
++	};
+ };
+ 
+ /* Colibri AD0 to AD3 */
+-- 
+2.25.1
+

@@ -1,0 +1,40 @@
+From 9cb1038a1f4027e14aab9a166fbfca563dedf3f9 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 6 Jun 2024 19:39:29 +0530
+Subject: [PATCH] i2c mux devices status
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 881806c91b02..f738d49d85ab 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -601,6 +601,7 @@ eeprom@50 {
+ 				reg = <0x50>;
+ 				pagesize = <16>;
+ 				size = <512>;
++				status = "okay";
+ 			};
+ 
+ 			/* OPT3005DTSR AMBIENT LIGHT SENSOR */
+@@ -611,6 +612,7 @@ light_sensor@44 {
+ 				pinctrl-0 = <&intr_light_sensor_gpio2>;
+ 				interrupt-parent = <&gpio2>;
+ 				interrupts = <7 GPIO_ACTIVE_HIGH>;
++				status = "okay";
+ 			};
+ 
+ 		};
+@@ -626,6 +628,7 @@ eeprom@50 {
+                                 reg = <0x50>;
+ 				pagesize = <16>;
+ 				size = <512>;
++				status = "okay";
+ 			};
+ 		};
+ 	};
+-- 
+2.25.1
+

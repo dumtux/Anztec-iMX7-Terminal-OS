@@ -1,0 +1,25 @@
+From c234db22c132b3c8fd1bc531b19de7e24dd328ea Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 24 May 2024 14:48:03 +0530
+Subject: [PATCH] interrupt fot light sensor
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index ea7a5d586f03..4d1d78161b06 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -602,6 +602,8 @@ light_sensor@44 {
+ 				reg = <0x44>;
+ 				pinctrl-name = "default";
+ 				pinctrl-0 = <&intr_light_sensor_gpio2>;
++				interrupt-parent = <&gpio2>;
++				interrupts = <7 GPIO_ACTIVE_HIGH>;
+ 			};
+ 
+ 		};
+-- 
+2.25.1
+

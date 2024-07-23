@@ -1,0 +1,30 @@
+From 7c507042360a600cd8d7b3256ba2f001d3b062f3 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Wed, 5 Jun 2024 12:44:19 +0530
+Subject: [PATCH] second eth mdio changes
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 5639edb4c2d6..80967806e54c 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -223,11 +223,9 @@ mdio {
+                         #address-cells = <1>;
+                         #size-cells = <0>;
+                         /* KSZ8041NL */
+-                        ethphy1: ethernet-phy@0 {
++                        ethphy1: ethernet-phy@1 {
+                                 compatible = "ethernet-phy-ieee802.3-c22";
+-                                max-speed = <100>;
+-                                micrel,led-mode = <0>;
+-                                reg = <0>;
++                                reg = <1>;
+                                 };
+                 };
+ };
+-- 
+2.25.1
+

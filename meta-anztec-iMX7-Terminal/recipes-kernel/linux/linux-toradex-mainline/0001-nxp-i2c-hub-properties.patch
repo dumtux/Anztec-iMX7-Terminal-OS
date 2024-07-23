@@ -1,0 +1,45 @@
+From 2596a8b8955ecee85af26bfe28efa568a1a049ad Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Mon, 27 May 2024 12:24:24 +0530
+Subject: [PATCH] nxp-i2c-hub-properties
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 62e94409dbf5..984adee65644 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -634,9 +634,14 @@ &i2c2 {
+ 	/* PCA9545APW,112 NXP I2C hub */
+ 	PCA9545APW: i2c-switch@70 {
+ 		compatible = "nxp,pca9545";
++		reg = <0x70>;
++		pinctrl-name = "default";
++		pinctrl-0 = <&intr_4_channel_hub>;
++		interrupt-parent = <&gpio3>;
++		interrupts = <2 GPIO_ACTIVE_LOW>;
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+-		reg = <0x70>;
++		status = "okay";
+ 	};
+ };
+ 
+@@ -1065,6 +1070,12 @@ MX7D_PAD_LPSR_GPIO1_IO07__I2C2_SDA	0x4000007f /* SODIMM 29 */
+                 >;
+         };
+ 
++	intr_4_channel_hub: i2c2hubint{
++		fsl,pins = <
++			MX7D_PAD_LCD_HSYNC__GPIO3_IO2		0x74 /* SODIMM 68 */
++		>;
++	};
++
+ 	pinctrl_i2c4_recovery: i2c4-recoverygrp {
+ 		fsl,pins = <
+ 			MX7D_PAD_ENET1_RGMII_TD2__GPIO7_IO8	0x4000007f
+-- 
+2.25.1
+

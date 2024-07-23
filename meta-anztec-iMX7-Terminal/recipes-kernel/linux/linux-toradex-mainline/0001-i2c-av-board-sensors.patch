@@ -1,32 +1,32 @@
-From 61e039412dd55b4f8cb6b78747732e605f71a040 Mon Sep 17 00:00:00 2001
-From: dineshneevee <dinesh@neeveetech.com>
-Date: Fri, 10 May 2024 10:54:33 +0530
-Subject: [PATCH] i2c av board sensors
+From e3aa67945889241ee0051c4fb3a498f5291d4555 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 23 May 2024 14:13:49 +0530
+Subject: [PATCH] i2c-av-board-sensors
 
 ---
  arch/arm/boot/dts/imx7-colibri.dtsi | 58 ++++++++++++++++++++++++++++-
  1 file changed, 56 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
-index 706b0b87b67d..45e033808d08 100644
+index 3164344d326e..63b528f360d5 100644
 --- a/arch/arm/boot/dts/imx7-colibri.dtsi
 +++ b/arch/arm/boot/dts/imx7-colibri.dtsi
-@@ -567,6 +567,48 @@ hdc2080: humidity@40 {
+@@ -574,6 +574,48 @@ hdc2080: humidity@40 {
  		interrupts = <3 IRQ_TYPE_EDGE_FALLING>;
  		status = "okay";
  	};
 +
 +	/* TCA9546APWR 4-Channel I2C bus switch */
 +	TCA9546APWR: 4-channel@70{
-+		compitable = "nxp,pca9548";
++		compatible = "nxp,pca9546";
 +		reg = <0x70>;
 +		pinctrl-name = "default";
-+                pinctrl-0 = <&intr_4_channel_gpio2>;
++		pinctrl-0 = <&intr_4_channel_gpio2>;
 +		status = "okay";
 +
 +		i2c4@0{
 +			#address-cells = <1>;
-+	                #size-cells = <0>;
++			#size-cells = <0>;
 +			reg = <0>;
 +
 +			/* 24LC04B-I_SN EEPOROM */
@@ -52,38 +52,38 @@ index 706b0b87b67d..45e033808d08 100644
 +
 +			/* 24LC04B-I_SN EEPOROM */
 +			eeprom@50 {
-+                                compatible = "microchip,24c32", "atmel,24c32";
++				compatible = "microchip,24c32", "atmel,24c32";
 +                                reg = <0x50>;
-+                        };
++			};
 +		};
 +	};
  };
  
  /* Colibri I2C: I2C2_SDA/SCL on SODIMM 94/81 */
-@@ -857,8 +899,8 @@ pinctrl_gpio1: gpio1grp {
- 		/*	MX7D_PAD_EPDC_DATA03__GPIO2_IO3		0x14 *//* Anztec SODIMM 117 */
- 		/*	MX7D_PAD_EPDC_DATA04__GPIO2_IO4		0x14 *//* Anztec SODIMM 119 */
- 		/*	MX7D_PAD_EPDC_DATA05__GPIO2_IO5		0x14 *//* Anztec SODIMM 121 */
+@@ -864,8 +906,8 @@ pinctrl_gpio1: gpio1grp {
+ 		/*	MX7D_PAD_EPDC_DATA03__GPIO2_IO3		0x14 *//* SODIMM 117 */
+ 		/*	MX7D_PAD_EPDC_DATA04__GPIO2_IO4		0x14 *//* SODIMM 119 */
+ 		/*	MX7D_PAD_EPDC_DATA05__GPIO2_IO5		0x14 *//* SODIMM 121 */
 -			MX7D_PAD_EPDC_DATA06__GPIO2_IO6		0x14 /* SODIMM 123 */
 -			MX7D_PAD_EPDC_DATA07__GPIO2_IO7		0x14 /* SODIMM 125 */
-+		/*	MX7D_PAD_EPDC_DATA06__GPIO2_IO6		0x14 *//* Anztec SODIMM 123 */
-+		/*	MX7D_PAD_EPDC_DATA07__GPIO2_IO7		0x14 *//* Anztec SODIMM 125 */
++		/*	MX7D_PAD_EPDC_DATA06__GPIO2_IO6		0x14 *//* SODIMM 123 */
++		/*	MX7D_PAD_EPDC_DATA07__GPIO2_IO7		0x14 *//* SODIMM 125 */
  			MX7D_PAD_EPDC_DATA08__GPIO2_IO8		0x74 /* SODIMM 91 */
  			MX7D_PAD_EPDC_DATA09__GPIO2_IO9		0x14 /* SODIMM 89 */
  			MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x74 /* SODIMM 105 */
-@@ -978,6 +1020,18 @@ MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x74 /* SODIMM 55 */
+@@ -985,6 +1027,18 @@ MX7D_PAD_ENET1_RGMII_RD3__GPIO7_IO3	0x74 /* SODIMM 55 */
  		>;
  	};
  
 +	intr_4_channel_gpio2: i2c4resetgrp {
 +		fsl,pins = <
-+			MX7D_PAD_EPDC_DATA06__GPIO2_IO6		0x74 /* SODIMM 123 */
++			MX7D_PAD_EPDC_DATA06__GPIO2_IO6         0x74 /* SODIMM 123 */
 +		>;
 +	};
 +
 +	intr_light_sensor_gpio2: i2c4lightgrp {
 +		fsl,pins = <
-+			MX7D_PAD_EPDC_DATA07__GPIO2_IO7		0x74 /* SODIMM 125 */
++			MX7D_PAD_EPDC_DATA07__GPIO2_IO7         0x74 /* SODIMM 125 */
 +		>;
 +	};
 +

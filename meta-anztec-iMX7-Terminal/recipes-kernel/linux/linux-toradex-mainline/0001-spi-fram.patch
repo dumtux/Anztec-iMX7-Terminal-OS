@@ -1,0 +1,47 @@
+From d66a67019069f169a93eb1b2787ce0c6536bc94c Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 24 May 2024 12:56:16 +0530
+Subject: [PATCH] spi fram
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 6919131397b6..00841ec5dac5 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -33,7 +33,7 @@ &atmel_mxt_ts {
+ &ecspi3 {
+ 	status = "okay";
+ 
+-	mcp2515: can@0 {
++/*	mcp2515: can@0 {
+ 		clocks = <&clk16m>;
+ 		compatible = "microchip,mcp2515";
+ 		interrupt-parent = <&gpio5>;
+@@ -44,6 +44,21 @@ mcp2515: can@0 {
+ 		spi-max-frequency = <10000000>;
+ 		vdd-supply = <&reg_3v3>;
+ 		xceiver-supply = <&reg_5v0>;
++	};*/
++
++	fram: fm25v02@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <2000000>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		m25p,fast-read;
++		status = "okay";
++
++		partition@p1 {
++		label = "spi-fram";
++		reg = <0x0 0x20000>;
++		};
+ 	};
+ };
+ 
+-- 
+2.25.1
+

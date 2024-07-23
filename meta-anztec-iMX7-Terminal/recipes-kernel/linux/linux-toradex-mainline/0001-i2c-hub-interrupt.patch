@@ -1,0 +1,25 @@
+From 19690bed12e16a9c45eee6b61f9864f1ef6d8812 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Fri, 24 May 2024 14:25:30 +0530
+Subject: [PATCH] i2c hub interrupt
+
+---
+ arch/arm/boot/dts/imx7-colibri.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri.dtsi b/arch/arm/boot/dts/imx7-colibri.dtsi
+index 76842bab27af..ea7a5d586f03 100644
+--- a/arch/arm/boot/dts/imx7-colibri.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri.dtsi
+@@ -581,6 +581,8 @@ TCA9546APWR: 4-channel@70{
+ 		reg = <0x70>;
+ 		pinctrl-name = "default";
+ 		pinctrl-0 = <&intr_4_channel_gpio2>;
++		interrupt-parent = <&gpio2>;
++		interrupts = <6 GPIO_ACTIVE_HIGH>;
+ 		status = "okay";
+ 
+ 		i2c4@0{
+-- 
+2.25.1
+
