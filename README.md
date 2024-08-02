@@ -8,11 +8,11 @@
 
 ```
 $ sudo apt install \
-gawk wget git diffstat unzip texinfo gcc build-essential \
+gawk wget git diffstat unzip texinfo gcc curl build-essential \
 chrpath socat cpio python3 python3-pip python3-pexpect \
 xz-utils debianutils iputils-ping python3-git python3-jinja2 \
 libegl1-mesa libsdl1.2-dev python3-subunit mesa-common-dev \
-zstd liblz4-tool file locales libacl1 libusb1-dev
+zstd liblz4-tool file locales libacl1 libusb-1.0-0-dev
 ```
 
 ```
@@ -20,6 +20,8 @@ $ sudo locale-gen en_US.UTF-8
 ```
 
 ### Clone the repository
+
+[Toradex Doc](https://developer.toradex.com/linux-bsp/os-development/build-yocto/build-a-reference-image-with-yocto-projectopenembedded/)
 
 Install the repo bootstrap binary:
 
@@ -70,25 +72,19 @@ MACHINE ?= "colibri-imx7-emmc"
 
 #### Add the Anztec-iMX7-Terminal-OS into the Build Environment
 
-Clone the repsitory into the layers
+Clone the repsitory into `oe-core/layers` folder:
 
 ```
 $ cd oe-core/layers
 $ git clone https://github.com/dumtux/Anztec-iMX7-Terminal-OS.git
 ```
 
-If the repository is private use the below method
-
-```
-$ git clone https://your_username:your_personal_access_token@github.com/dumtux/Anztec-iMX7-Terminal-OS.git
-```
-
-Add the layer into bblayers.conf using the command
+Add the layer into `bblayers.conf` using the command
 
 ```
 $ cd ../
-$ . exports
-$ bitbake-layers add-layers ../path/to/custom/layer
+$ . export
+$ bitbake-layers add-layer ../path/to/custom/layer
 ```
 
 After adding the layer we can confirm the addition of layer in build environment by:
@@ -139,7 +135,7 @@ Then go to the file directory and open the `.bb` file and add the patch files in
 Also copy the u-boot changes patchs and paste in the .bb file location by following steps:
 
 ```
-$ cp u-boot-chages.patch ../../../layers/meta-toradex-bsp-common/recipes-bsp/u-boot/u-boot-toradex
+$ cp ./layers/Anztec-iMX7-Terminal-OS/meta-anztec-iMX7-terminal/u-boot-changes/u-boot-chages/*.patch ./layers/meta-toradex-bsp-common/recipes-bsp/u-boot/u-boot-toradex
 ```
 
 Change the patch file name accordingly.
@@ -159,7 +155,7 @@ We can build the image and check the changes.
 For building the image go to the build environment and execute the following command:
 
 ```
-$ bitbake anztec-imx7-terminal-image
+$ bitbake anztec-imx7-terminal-multimedia-image
 ```
 
 ### Flash the image
