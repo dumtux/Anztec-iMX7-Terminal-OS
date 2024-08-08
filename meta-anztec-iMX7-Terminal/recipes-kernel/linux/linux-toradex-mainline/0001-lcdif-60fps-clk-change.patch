@@ -1,0 +1,25 @@
+From ef09d5eef72e12d1230f21e88fdd246e2ee91669 Mon Sep 17 00:00:00 2001
+From: vinothneevee <vinoth@neeveetech.com>
+Date: Thu, 8 Aug 2024 13:37:37 +0530
+Subject: [PATCH] lcdif 60fps clk change
+
+---
+ arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+index 913ad8a4a590..68885da3752b 100644
+--- a/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
++++ b/arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
+@@ -181,7 +181,7 @@ display0: lcd-display {
+                display-timings {
+                        native-mode = <&timing_wxga>;
+                        timing_wxga: 1280x800 {
+-                               clock-frequency = <35553600>;
++                               clock-frequency = <68571429>;
+                                hactive = <1280>;
+                                vactive = <800>;
+                                hfront-porch = <70>;
+-- 
+2.25.1
+
